@@ -56,19 +56,19 @@ object Build : BuildType({
         }
         script {
             name = "Stop carts service"
-            scriptContent = "ssh -oStrictHostKeyChecking=no taras@${'$'}webIP 'sudo systemctl stop carts'"
+            scriptContent = "ssh -oStrictHostKeyChecking=no taras@"${'$'}(echo ${'$'}webIP)" 'sudo systemctl stop carts'"
         }
         script {
             name = "copy to remote"
-            scriptContent = "scp -oStrictHostKeyChecking=no target/carts.jar taras@webIP:/opt"
+            scriptContent = "scp -oStrictHostKeyChecking=no target/carts.jar taras@"${'$'}(echo ${'$'}webIP)":/opt"
         }
         script {
             name = "Reload systemctl"
-            scriptContent = """ssh -oStrictHostKeyChecking=no taras${'$'}webIP \'sudo systemctl daemon-reload\'"""
+            scriptContent = """ssh -oStrictHostKeyChecking=no taras@"${'$'}(echo ${'$'}webIP)" \'sudo systemctl daemon-reload\'"""
         }
         script {
             name = "Run carts"
-            scriptContent = """ssh -oStrictHostKeyChecking=no taras@"$webIP" \'sudo systemctl start carts\'"""
+            scriptContent = """ssh -oStrictHostKeyChecking=no taras@"${'$'}(echo ${'$'}webIP)" \'sudo systemctl start carts\'"""
         }
     }
 
