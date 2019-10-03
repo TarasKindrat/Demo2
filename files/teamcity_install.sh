@@ -38,6 +38,7 @@ sudo mkdir /opt/teamcity;
 sudo mv TeamCity /opt/teamcity;
 #Delete folder with Teamcity in home directory
 sudo rm -R TeamCity;
+sudo rm TeamCity-2019.1.3.tar.gz;
 # Create unit teamsity
 echo "Create  systemd unit teamsity";
 sudo touch /etc/systemd/system/teamcity.service;
