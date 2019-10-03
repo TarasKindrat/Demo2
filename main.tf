@@ -154,11 +154,7 @@ resource "null_resource" "web_prov" {
     agent       = false
     private_key = "${file(var.private_key_path)}"
   }
-  # Copy authorized_keys for access teamcity to web
-  provisioner "file" {
-    source      = "/home/taras/keys/.ssh/authorized_keys"
-    destination ="/home/taras/.ssh/authorized_keys"
- } 
+  
  # Copy sh provision script
   provisioner "file" {
     source      = "./files/web_install.sh"

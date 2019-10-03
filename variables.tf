@@ -56,12 +56,12 @@ variable "nat_ip" {
 }
 variable "public_key_path" {
   description = "public key for user Taras"
-  default     = "/opt/keys/.ssh/id_rsa.pub"
+  default     = "/home/taras/.ssh/id_rsa.pub"
 }
 
 variable private_key_path {
   description = "Path to the private key used for ssh access"
-  default     = "/opt/keys/.ssh/id_rsa"
+  default     = "/home/taras/.ssh/id_rsa"
 }
  variable ssh_user {
   description = "Name of ssh user for connect to host"
