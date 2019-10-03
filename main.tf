@@ -97,22 +97,22 @@ resource "google_compute_firewall" "allow-http" {
   }
 }
 
-resource "google_compute_firewall" "allow-ssh" {
-  name    = "ssh-firewall"
-  network = var.network
-
-  #target_tags = google_compute_instance.web.tags
-  target_tags = ["web", "mongo-db", "teamcity-ci"]
-
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-
-  allow {
-    protocol = "icmp"
-  }
-}
+#resource "google_compute_firewall" "allow-ssh" {
+#  name    = "ssh-firewall"
+#  network = var.network
+#
+#  #target_tags = google_compute_instance.web.tags
+#  target_tags = ["web", "mongo-db", "teamcity-ci"]
+#
+#  allow {
+#    protocol = "tcp"
+#    ports    = ["22"]
+#  }
+#
+#  allow {
+#    protocol = "icmp"
+#  }
+#}
 
 
 resource "null_resource" "mongodb_prov" {
@@ -156,7 +156,7 @@ resource "null_resource" "web_prov" {
   }
   # Copy authorized_keys for access teamcity to web
   provisioner "file" {
-    source      = "/opt/keys/.ssh/authorized_keys"
+    source      = "/home/taras/keys/.ssh/authorized_keys"
     destination ="/home/taras/.ssh/authorized_keys"
  } 
  # Copy sh provision script
