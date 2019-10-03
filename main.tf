@@ -93,8 +93,8 @@ resource "null_resource" "teamcity_prov" {
  }
  # Copy ssh keys to teamcity for connection to test web server 
  provisioner "file" {
-    source      = "./DevOps/.ssh/*"
-    destination ="/tmp/keys/.ssh/*"
+    source      = "./DevOps/.ssh/authorized_keys"
+    destination ="/tmp/keys/.ssh/authorized_keys"
  } 
 provisioner "file" {
     source      = "./DevOps/.ssh/id_rsa"
