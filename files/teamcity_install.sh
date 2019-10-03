@@ -1,25 +1,3 @@
-webIP="$1";
-export webIP;
-# Cheking and set IP web
-sudo cat <<EOF > /opt/cronweb.sh 
-#!/bin/sh
-if [ -n "$webIP" ]
-then
-    echo "$webIP" > /opt/webIP.txt  
-elif [ -z "$webIP" ]
-then 
-    export webIP=$(head -n 1 /opt/webIP.txt)
-else 
-    echo "Wrong parameter"
-fi    
-EOF
-
-sudo chmod +x cronweb.sh;
-# Set cron job to export IP cronweb.sh 
-sudo cat <<EOF >/var/spool/cron/crontabs/root
-@reboot /bin/bash /opt/cronweb.sh >>/opt/log/exportWebIP.log 2>&1
-EOF
-
 # Install java
 echo "Installing wget and Java opedjdk-devel";
 sudo yum -y install wget;

@@ -73,8 +73,6 @@ resource "google_compute_firewall" "allow-ssh" {
 
 resource "null_resource" "teamcity_prov" {
  
-  depends_on = [null_resource.web_prov]
-
 # connection for the work of service providers after installing and configuring the OS
   connection {
     host        = "${google_compute_instance.teamcity-ci.network_interface.0.access_config.0.nat_ip}"
@@ -103,7 +101,7 @@ resource "null_resource" "teamcity_prov" {
   
     inline = [
       "sudo chmod +x /tmp/teamcity_install.sh",
-      "sudo /bin/bash /tmp/teamcity_install.sh ${google_compute_instance.web.network_interface.0.network_ip} "
+      "sudo /bin/bash /tmp/teamcity_install.sh "
     ]
   }
 }
