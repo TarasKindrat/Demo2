@@ -64,11 +64,11 @@ object Build : BuildType({
         }
         script {
             name = "Reload systemctl"
-            scriptContent = """ssh -oStrictHostKeyChecking=no ${'$'}webIP \'sudo systemctl daemon-reload\'"""
+            scriptContent = """ssh -oStrictHostKeyChecking=no taras${'$'}webIP \'sudo systemctl daemon-reload\'"""
         }
         script {
             name = "Run carts"
-            scriptContent = """ssh -oStrictHostKeyChecking=no taras@webIP \'sudo systemctl start carts\'"""
+            scriptContent = """ssh -oStrictHostKeyChecking=no taras@"$webIP" \'sudo systemctl start carts\'"""
         }
     }
 
