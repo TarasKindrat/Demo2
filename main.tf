@@ -54,7 +54,7 @@ resource "google_compute_firewall" "allow-teamcity-ci-http" {
 }
 
 resource "null_resource" "teamcity_prov" {
- 
+ depends_on = [google_compute_instance.teamcity-ci]
 # connection for the work of service providers after installing and configuring the OS
   connection {
     host        = "${google_compute_instance.teamcity-ci.network_interface.0.access_config.0.nat_ip}"
