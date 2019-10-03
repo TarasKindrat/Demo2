@@ -71,16 +71,12 @@ resource "null_resource" "teamcity_prov" {
  }
  # Copy ssh keys to teamcity for connection to test web server 
  provisioner "file" {
-    source      = "./DevOps/.ssh/authorized_keys"
-    destination ="/home/taras/keys/.ssh/authorized_keys"
- } 
-provisioner "file" {
     source      = "./DevOps/.ssh/id_rsa"
-    destination ="/home/taras/keys/.ssh/id_rsa"
+    destination ="/home/taras/.ssh/id_rsa"
  } 
  provisioner "file" {
     source      = "./DevOps/.ssh/id_rsa.pub"
-    destination ="/home/taras/keys/.ssh/id_rsa.pub"
+    destination ="/home/taras/.ssh/id_rsa.pub"
  }  
 # Copy bash script to teamcity instance 
   provisioner "file" {
