@@ -83,10 +83,20 @@ resource "null_resource" "teamcity_prov" {
     agent       = false
     private_key = "${file(var.private_key_path)}"
   }
-
+# Copy bash script to teamcity instance 
   provisioner "file" {
     source      = "./files/teamcity_install.sh"
-    destination = "/tmp/teamcity_install.sh"   
+    destination = "/tmp/teamcity_install.sh" 
+ } 
+ # Copy credential key to teamcity for deploy from there infrastructure by terraform
+ provisioner "file" {
+    source      = "./DevOps/DevOps1.json"
+    destination ="/opt/DevOps/DevOps1.json"
+ }
+ # Copy ssh keys to teamcity for connection to test web server 
+ provisioner "file" {
+    source      = "./DevOps/.ssh/*"
+    destination ="/opt/DevOps/.ssh/*"
  } 
 
   provisioner "remote-exec" {
