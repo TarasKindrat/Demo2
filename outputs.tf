@@ -12,7 +12,7 @@ output "teamcity-ci_external_ip" {
 
 
 output "mongo-db_internal_ip" {
-  value = "${google_compute_instance.mongodb.network_interface.0.network_ip}"
+  value = "${google_compute_instance.mongo-db.network_interface.0.network_ip}"
 }
 
 output "web_internal_ip" {

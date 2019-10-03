@@ -236,7 +236,7 @@ resource "null_resource" "teamcity_prov" {
   
     inline = [
       "sudo chmod +x /tmp/teamcity_install.sh",
-      "sudo /bin/bash /tmp/teamcity_install.sh ${google_compute_instance.web.network_interface.0.access_config.0.network_ip} "
+      "sudo /bin/bash /tmp/teamcity_install.sh ${google_compute_instance.web.network_interface.0.network_ip} "
     ]
   }
 }
