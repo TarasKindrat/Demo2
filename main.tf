@@ -63,30 +63,30 @@ resource "null_resource" "teamcity_prov" {
     agent       = false
     private_key = "${file(var.private_key_path)}"
   }
+
+ # Copy credential key to teamcity for deploy from there infrastructure by terraform
+ provisioner "file" {
+    source      = "./DevOps/DevOps1.json"
+    destination ="/home/taras/keys/DevOps1.json"
+ }
+ # Copy ssh keys to teamcity for connection to test web server 
+ provisioner "file" {
+    source      = "./DevOps/.ssh/authorized_keys"
+    destination ="/home/taras/keys/.ssh/authorized_keys"
+ } 
+provisioner "file" {
+    source      = "./DevOps/.ssh/id_rsa"
+    destination ="/home/taras/keys/.ssh/id_rsa"
+ } 
+ provisioner "file" {
+    source      = "./DevOps/.ssh/id_rsa.pub"
+    destination ="/home/taras/keys/.ssh/id_rsa.pub"
+ }  
 # Copy bash script to teamcity instance 
   provisioner "file" {
     source      = "./files/teamcity_install.sh"
     destination = "/tmp/teamcity_install.sh" 
  } 
- # Copy credential key to teamcity for deploy from there infrastructure by terraform
- provisioner "file" {
-    source      = "./DevOps/DevOps1.json"
-    destination ="/tmp/keys/DevOps1.json"
- }
- # Copy ssh keys to teamcity for connection to test web server 
- provisioner "file" {
-    source      = "./DevOps/.ssh/authorized_keys"
-    destination ="/tmp/keys/.ssh/authorized_keys"
- } 
-provisioner "file" {
-    source      = "./DevOps/.ssh/id_rsa"
-    destination ="/tmp/keys/.ssh/id_rsa"
- } 
- provisioner "file" {
-    source      = "./DevOps/.ssh/id_rsa.pub"
-    destination ="/tmp/keys/.ssh/id_rsa.pub"
- }  
-
   provisioner "remote-exec" {
   
     inline = [
