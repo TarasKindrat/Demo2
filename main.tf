@@ -53,24 +53,6 @@ resource "google_compute_firewall" "allow-teamcity-ci-http" {
   }
 }
 
-resource "google_compute_firewall" "allow-ssh" {
-  name    = "ssh-firewall"
-  network = var.network
-
-  #target_tags = google_compute_instance.web.tags
-  target_tags = ["teamcity-ci"]
-
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-
-  allow {
-    protocol = "icmp"
-  }
-}
-
-
 resource "null_resource" "teamcity_prov" {
  
 # connection for the work of service providers after installing and configuring the OS
