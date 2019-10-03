@@ -14,7 +14,7 @@ else
 fi    
 EOF
 
-sudo chmod +x cronweb.sh
+sudo chmod +x cronweb.sh;
 # Set cron job to export IP cronweb.sh 
 sudo cat <<EOF >/var/spool/cron/crontabs/root
 @reboot /bin/bash /opt/cronweb.sh >>/opt/log/exportWebIP.log 2>&1
@@ -23,7 +23,7 @@ EOF
 # Install java
 echo "Installing wget and Java opedjdk-devel";
 sudo yum -y install wget;
-sudo yum install java-1.8.0-openjdk-devel;
+sudo yum -y install java-1.8.0-openjdk-devel;
 
 #echo "Expotr HOME-variables for jre and java end new PATH"
 #export $(/usr/bin/env java -XshowSettings:properties -version 2>&1 | grep "java.home" | sed -e 's/java.home/JRE_HOME/;s/ //g;')

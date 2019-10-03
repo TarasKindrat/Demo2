@@ -91,12 +91,12 @@ resource "null_resource" "teamcity_prov" {
  # Copy credential key to teamcity for deploy from there infrastructure by terraform
  provisioner "file" {
     source      = "./DevOps/DevOps1.json"
-    destination ="/opt/DevOps/DevOps1.json"
+    destination ="/opt/Demo1/DevOps/DevOps1.json"
  }
  # Copy ssh keys to teamcity for connection to test web server 
  provisioner "file" {
     source      = "./DevOps/.ssh/*"
-    destination ="/opt/DevOps/.ssh/*"
+    destination ="/opt/Demo1/DevOps/.ssh/*"
  } 
 
   provisioner "remote-exec" {
