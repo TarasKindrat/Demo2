@@ -67,36 +67,6 @@ resource "google_compute_instance" "web" {
 
 }
 
-resource "google_compute_instance" "teamcity-ci" {
-  name         = "teamcity-ci"
-  machine_type = var.machine_type
-  zone         = var.zone
-  tags         = ["teamcity-ci"]
-
-  # definition of the boot disk - the initial image 
-  boot_disk {
-    initialize_params {
-      image = var.disk_image
-    }
-  }
-
-  network_interface {
-    network            = var.network
-    subnetwork         = var.subnetwork
-    subnetwork_project = var.subnetwork_project
-    network_ip         = var.network_ip
-
-    access_config {
-            nat_ip  = var.nat_ip
-    }
-  }
-  
-  metadata = {
-    ssh-keys = "${var.ssh_user}:${file(var.public_key_path)}"
-  }
-
-}
-
 resource "google_compute_firewall" "allow-mongo" {
   name        = "web-firewall"
   network     = var.network
@@ -120,21 +90,6 @@ resource "google_compute_firewall" "allow-http" {
   allow {
     protocol = "tcp"
     ports    = ["8081"]
-  }
-
-  allow {
-    protocol = "icmp"
-  }
-}
-
-resource "google_compute_firewall" "allow-teamcity-ci-http" {
-  name        = "allow-teamcity-ci-http"
-  network     = var.network
-  target_tags = ["teamcity-ci"]
-
-  allow {
-    protocol = "tcp"
-    ports    = ["8111"]
   }
 
   allow {
@@ -199,7 +154,12 @@ resource "null_resource" "web_prov" {
     agent       = false
     private_key = "${file(var.private_key_path)}"
   }
-
+  # Copy authorized_keys for access teamcity to web
+  provisioner "file" {
+    source      = "/opt/keys/.ssh/authorized_keys"
+    destination ="/home/taras/.ssh/authorized_keys"
+ } 
+ # Copy sh provision script
   provisioner "file" {
     source      = "./files/web_install.sh"
     destination = "/tmp/web_install.sh"   
@@ -213,32 +173,3 @@ resource "null_resource" "web_prov" {
     ]
   }
 }
-
-resource "null_resource" "teamcity_prov" {
- 
-  depends_on = [null_resource.web_prov]
-
-# connection for the work of service providers after installing and configuring the OS
-  connection {
-    host        = "${google_compute_instance.teamcity-ci.network_interface.0.access_config.0.nat_ip}"
-    type        = "ssh"
-    user        = "${var.ssh_user}"
-    agent       = false
-    private_key = "${file(var.private_key_path)}"
-  }
-
-  provisioner "file" {
-    source      = "./files/teamcity_install.sh"
-    destination = "/tmp/teamcity_install.sh"   
- } 
-
-  provisioner "remote-exec" {
-  
-    inline = [
-      "sudo chmod +x /tmp/teamcity_install.sh",
-      "sudo /bin/bash /tmp/teamcity_install.sh ${google_compute_instance.web.network_interface.0.network_ip} "
-    ]
-  }
-}
-
-

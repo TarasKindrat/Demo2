@@ -2,7 +2,7 @@ variable "credentials" {
   #description = "${file("CREDENTIALS_FILE.json")}"
   description = "CREDENTIALS_JSON_PATH"
   #default = "${file("$CREDENTIALS_JSON_PATH")}"
-  default = "home/taras/DevOpS/DevOps1-5a32fd64e0e6.json"
+  default = "/opt/keys/DevOps1.json"
 }
 
 variable "project" {
@@ -56,12 +56,12 @@ variable "nat_ip" {
 }
 variable "public_key_path" {
   description = "public key for user Taras"
-  default     = "~/.ssh/id_rsa.pub"
+  default     = "/opt/keys/.ssh/id_rsa.pub"
 }
 
 variable private_key_path {
   description = "Path to the private key used for ssh access"
-  default     = "~/.ssh/id_rsa"
+  default     = "/opt/keys/.ssh/id_rsa"
 }
  variable ssh_user {
   description = "Name of ssh user for connect to host"
