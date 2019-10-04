@@ -3,10 +3,10 @@ echo "Installing wget and Java opedjdk-devel";
 sudo yum -y install wget;
 sudo yum -y install java-1.8.0-openjdk-devel;
 
-#echo "Expotr HOME-variables for jre and java end new PATH"
-#export $(/usr/bin/env java -XshowSettings:properties -version 2>&1 | grep "java.home" | sed -e 's/java.home/JRE_HOME/;s/ //g;')
-#export $(/usr/bin/env java -XshowSettings:properties -version 2>&1 | grep "java.home" | sed -e 's/java.home/JAVA_HOME/;s/ //g;'| rev | cut -c 5- | rev)
-#export PATH=$PATH:$(echo "$JAVA_HOME/bin"):$(echo "$JRE_HOME/bin")
+echo "Expotr HOME-variables for jre and java end new PATH"
+export $(/usr/bin/env java -XshowSettings:properties -version 2>&1 | grep "java.home" | sed -e 's/java.home/JRE_HOME/;s/ //g;')
+export $(/usr/bin/env java -XshowSettings:properties -version 2>&1 | grep "java.home" | sed -e 's/java.home/JAVA_HOME/;s/ //g;'| rev | cut -c 5- | rev)
+export PATH=$PATH:$(echo "$JAVA_HOME/bin"):$(echo "$JRE_HOME/bin")
 
 # Download Teamcity
 echo "Downloading Teamcity";
