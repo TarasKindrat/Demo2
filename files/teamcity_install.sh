@@ -1,6 +1,7 @@
 # Install java
 echo "Installing wget and Java opedjdk-devel";
 sudo yum -y install wget;
+sudo yum -y install java-1.8.0-openjdk;
 sudo yum -y install java-1.8.0-openjdk-devel;
 
 echo "Expotr HOME-variables for jre and java end new PATH"
