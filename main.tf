@@ -67,7 +67,7 @@ resource "null_resource" "teamcity_prov" {
  # Copy credential key to teamcity for deploy from there infrastructure by terraform
  provisioner "file" {
     source      = "./DevOps/DevOps1.json"
-    destination ="/home/taras/keys/DevOps1.json"
+    destination ="/home/taras/.ssh/DevOps1.json"
  }
  # Copy ssh keys to teamcity for connection to test web server 
  provisioner "file" {
