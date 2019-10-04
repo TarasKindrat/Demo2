@@ -2,7 +2,7 @@ variable "credentials" {
   #description = "${file("CREDENTIALS_FILE.json")}"
   description = "CREDENTIALS_JSON_PATH"
   #default = "${file("$CREDENTIALS_JSON_PATH")}"
-  default = "/opt/keys/DevOps1.json"
+  default = "/home/taras/keys/DevOps1.json"
 }
 
 variable "project" {
