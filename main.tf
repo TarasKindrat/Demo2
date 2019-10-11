@@ -68,7 +68,7 @@ resource "google_compute_instance" "web" {
 }
 
 resource "google_compute_firewall" "allow-mongo" {
-  name        = "web-firewall"
+  name        = "allow-mongo"
   network     = var.network
   target_tags = ["mongo-db"]
 
@@ -83,7 +83,7 @@ resource "google_compute_firewall" "allow-mongo" {
 }
 
 resource "google_compute_firewall" "allow-http" {
-  name        = "web-firewall"
+  name        = "allow-http"
   network     = var.network
   target_tags = ["web"]
 
@@ -131,7 +131,8 @@ resource "null_resource" "mongodb_prov" {
   provisioner "file" {
     source      = "./files/mongo_install.sh"
     destination = "/tmp/mongo_install.sh"   
- } 
+ }
+   
   
   provisioner "remote-exec" {
 
