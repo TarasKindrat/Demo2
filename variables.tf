@@ -22,7 +22,7 @@ variable "zone" {
 
 variable "machine_type" {
   description = "The machine type to create"
-  default     = "f1-micro"
+  default     = "n1-standard-1"
 }
 
 variable "disk_image" {
