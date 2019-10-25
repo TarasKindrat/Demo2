@@ -97,22 +97,22 @@ resource "google_compute_firewall" "allow-http" {
   }
 }
 
-#resource "google_compute_firewall" "allow-ssh" {
-#  name    = "ssh-firewall"
-#  network = var.network
-#
-#  #target_tags = google_compute_instance.web.tags
-#  target_tags = ["web", "mongo-db", "teamcity-ci"]
-#
-#  allow {
-#    protocol = "tcp"
-#    ports    = ["22"]
-#  }
-#
-#  allow {
-#    protocol = "icmp"
-#  }
-#}
+resource "google_compute_firewall" "allow-ssh" {
+  name    = "ssh-firewall"
+  network = var.network
+
+  #target_tags = google_compute_instance.web.tags
+  target_tags = ["web", "mongo-db", "teamcity-ci"]
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+
+  allow {
+    protocol = "icmp"
+  }
+}
 
 
 resource "null_resource" "mongodb_prov" {
@@ -121,6 +121,6 @@ resource "null_resource" "mongodb_prov" {
 
   provisioner "local-exec" {
     #command = "ansible-playbook -u taras -i '${self.public_ip},' --private-key ${var.private_key_path} provision.yml"
-    command = "ansible-playbook provision.yml" 
+    command = "ansible-playbook provision_install_Docker.yml" 
   }
 } 
