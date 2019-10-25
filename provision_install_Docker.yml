@@ -6,12 +6,11 @@
   tasks:
     - name: Installing Docker Prerequisite packages
       yum:
-        - name: "{{ item }}"
-          state: latest
-          with_items:
+        name:
           - yum-utils
           - device-mapper-persistent-data
           - lvm2
+        state: latest
 
     - name: Configuring docker-ce repo
       get_url:
@@ -21,12 +20,11 @@
 
     - name: Installing Docker latest version
       yum:
-        - name: "{{ item }}"
-          state: present
-          with_items:
+        name:
           - docker-ce
           - docker-ce-cli
           - containerd.io
+        state: latest
 
     - name: Starting and Enabling Docker service
       service:
