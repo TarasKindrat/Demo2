@@ -38,6 +38,7 @@ resource "google_compute_instance" "mongo-db" {
 
 
 resource "google_compute_instance" "web" {
+  depends_on = [google_compute_instance.mongo-db]
   name         = "web"
   machine_type = var.machine_type
   zone         = var.zone
@@ -68,6 +69,7 @@ resource "google_compute_instance" "web" {
 }
 
 resource "google_compute_firewall" "allow-mongo" {
+  depends_on = [google_compute_instance.web, google_compute_instance.mongo-db]
   name        = "allow-mongo"
   network     = var.network
   target_tags = ["mongo-db"]
@@ -83,6 +85,7 @@ resource "google_compute_firewall" "allow-mongo" {
 }
 
 resource "google_compute_firewall" "allow-http" {
+  depends_on = [google_compute_instance.web, google_compute_instance.mongo-db]
   name        = "allow-http"
   network     = var.network
   target_tags = ["web"]
@@ -98,6 +101,7 @@ resource "google_compute_firewall" "allow-http" {
 }
 
 resource "google_compute_firewall" "allow-ssh" {
+  depends_on = [google_compute_instance.web, google_compute_instance.mongo-db]
   name    = "ssh-firewall"
   network = var.network
 
