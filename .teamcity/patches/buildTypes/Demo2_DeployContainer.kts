@@ -2,6 +2,7 @@ package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -15,6 +16,13 @@ create(RelativeId("Demo2"), BuildType({
 
     vcs {
         root(DslContext.settingsRoot)
+    }
+
+    steps {
+        script {
+            name = "Run mongodb3.4"
+            scriptContent = "docker -H ssh://taras@mongo-db run -d mongo:3.4 -p 27017:27017"
+        }
     }
 }))
 
