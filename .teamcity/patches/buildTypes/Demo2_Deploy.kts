@@ -38,7 +38,6 @@ create(RelativeId("Demo2"), BuildType({
         }
         script {
             name = "Create instances"
-            enabled = false
             scriptContent = """
                 if [ -d Demo2 ]; then
                    sudo rm -R Demo2;
