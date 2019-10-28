@@ -38,6 +38,7 @@ resource "google_compute_instance" "mongo-db" {
 
 
 resource "google_compute_instance" "web" {
+  depends_on = [google_compute_instance.mongo-db]
   name         = "web"
   machine_type = var.machine_type
   zone         = var.zone
@@ -118,9 +119,9 @@ resource "google_compute_firewall" "allow-http" {
 #}
 
 
-resource "null_resource" "mongodb_prov" {
+resource "null_resource" "provision" {
   
-  depends_on = [google_compute_instance.web, google_compute_instance.mongo-db]
+  depends_on = [google_compute_firewall.allow-http]
 
   provisioner "local-exec" {
     #command = "ansible-playbook -u taras -i '${self.public_ip},' --private-key ${var.private_key_path} provision.yml"
