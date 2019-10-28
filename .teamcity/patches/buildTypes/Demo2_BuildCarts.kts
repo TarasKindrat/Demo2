@@ -54,7 +54,7 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 #docker build uri#ref:dir
-                cd /home/taras/carts 
+                cd /home/taras/carts; 
                 docker build https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile -t carts_image:latest
             """.trimIndent())
             param("jetbrains.buildServer.deployer.targetUrl", "web")
