@@ -42,7 +42,7 @@ WantedBy=multi-user.target
 EOF
 
 # No cheking ssh keys inside network
-sudo cat <<EOF >> ~/.ssh/config 
+sudo cat <<EOF >> /etc/ssh/ssh_config
 Host 10.156.0.*
    StrictHostKeyChecking no
    UserKnownHostsFile=/dev/null
