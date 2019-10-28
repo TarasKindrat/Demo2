@@ -27,6 +27,15 @@ create(RelativeId("Demo2"), BuildType({
             runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
         step {
+            name = "Stop carts service"
+            type = "ssh-exec-runner"
+            param("jetbrains.buildServer.deployer.username", "taras")
+            param("jetbrains.buildServer.sshexec.command", "sudo systemctl stop carts")
+            param("jetbrains.buildServer.deployer.targetUrl", "web")
+            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
+            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
+        }
+        step {
             name = "Upload carts to remote web host"
             type = "ssh-deploy-runner"
             param("jetbrains.buildServer.deployer.username", "taras")
@@ -34,15 +43,6 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.targetUrl", "web")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.deployer.ssh.transport", "jetbrains.buildServer.deployer.ssh.transport.scp")
-            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
-        }
-        step {
-            name = "Stop carts service"
-            type = "ssh-exec-runner"
-            param("jetbrains.buildServer.deployer.username", "taras")
-            param("jetbrains.buildServer.sshexec.command", "sudo systemctl stop carts")
-            param("jetbrains.buildServer.deployer.targetUrl", "web")
-            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
     }
