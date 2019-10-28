@@ -64,7 +64,7 @@ create(RelativeId("Demo2"), BuildType({
             workingDir = "/home/taras/carts"
             scriptContent = """
                 #docker build uri#ref:dir
-                docker build -t carts_image https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile .
+                docker build https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile -t carts_image:latest
             """.trimIndent()
         }
     }
