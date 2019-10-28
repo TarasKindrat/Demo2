@@ -63,6 +63,7 @@ create(RelativeId("Demo2"), BuildType({
         }
         script {
             name = "Check Docker version (local)"
+            enabled = false
             scriptContent = "docker --version"
         }
         step {
