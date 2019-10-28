@@ -15,6 +15,8 @@ create(RelativeId("Demo2"), BuildType({
     id("Demo2_BuildCarts")
     name = "Build_Carts"
 
+    artifactRules = "target => target"
+
     vcs {
         root(RelativeId("Demo2_HttpsGithubComTarasKindratCartsGitRefsHeadsMaster"))
     }
