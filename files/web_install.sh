@@ -1,18 +1,5 @@
-# Bash script for creating carts service
-sudo cat <<EOF > /opt/carts.sh 
-#!/bin/sh
-if [ "$1"=="start" ]
-then
-    java -Ddb:carts-db="$mongodb" -jar /opt/carts.jar;
-elif [ "$1"=="stop" ]
-then 
-    kill $(ps aux | grep *carts* | grep -v "grep" | tr -s " "| cut -d " " -f 2)
-else 
-    echo "Wrong parameter, start or stop expected"
-fi    
-EOF
 
-sudo chmod +x /opt/carts.sh
+Echo "Creating carts.service"
 
 sudo cat <<EOF > /etc/systemd/system/carts.service 
 [Unit]
