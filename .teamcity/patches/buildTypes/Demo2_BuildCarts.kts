@@ -40,7 +40,7 @@ create(RelativeId("Demo2"), BuildType({
             type = "ssh-deploy-runner"
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.deployer.sourcePath", "target/carts.jar")
-            param("jetbrains.buildServer.deployer.targetUrl", "web")
+            param("jetbrains.buildServer.deployer.targetUrl", "web:/home/taras/carts")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.deployer.ssh.transport", "jetbrains.buildServer.deployer.ssh.transport.scp")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
