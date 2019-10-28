@@ -40,6 +40,14 @@ ExecStop=/opt/teamcity/TeamCity/bin/runAll.sh stop
 [Install]
 WantedBy=multi-user.target
 EOF
+
+# No cheking ssh keys inside network
+sudo cat <<EOF >> ~/.ssh/config 
+Host 10.156.0.*
+   StrictHostKeyChecking no
+   UserKnownHostsFile=/dev/null
+EOF
+
 echo "statring Teamcity";
 sudo systemctl enable teamcity;
 sudo systemctl start teamcity;
