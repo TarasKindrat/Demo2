@@ -75,7 +75,6 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Check Docker version web"
             type = "ssh-exec-runner"
-            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", "docker --version")
             param("jetbrains.buildServer.deployer.targetUrl", "web")
