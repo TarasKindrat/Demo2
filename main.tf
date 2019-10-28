@@ -125,6 +125,6 @@ resource "null_resource" "provision" {
 
   provisioner "local-exec" {
     #command = "ansible-playbook -u taras -i '${self.public_ip},' --private-key ${var.private_key_path} provision.yml"
-    command = "ansible-playbook provision_install_Docker.yml -vvvv" 
+    command = "sleep 10; ansible-playbook provision_install_Docker.yml -vvvv" 
   }
 } 
