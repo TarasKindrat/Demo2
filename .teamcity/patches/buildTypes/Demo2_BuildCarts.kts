@@ -23,7 +23,7 @@ create(RelativeId("Demo2"), BuildType({
 
     steps {
         maven {
-            goals = "clean test"
+            goals = "clean test package"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
         step {
