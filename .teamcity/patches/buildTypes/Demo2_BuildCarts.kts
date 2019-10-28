@@ -26,8 +26,7 @@ create(RelativeId("Demo2"), BuildType({
         maven {
             goals = "clean test"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
-            jdkHome = "%env.JDK_18%"
-            jvmArgs = "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.x86_64/jre"
+            jdkHome = "usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/taras/.local/bin:/home/taras/bin:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.x86_64/jre/bin"
         }
         step {
             name = "Stop carts service"
