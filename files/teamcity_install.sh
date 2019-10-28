@@ -47,6 +47,7 @@ Host 10.156.0.*
    StrictHostKeyChecking no
    UserKnownHostsFile=/dev/null
 EOF
+sudo systemctl restart sshd
 
 echo "statring Teamcity";
 sudo systemctl enable teamcity;
