@@ -53,7 +53,9 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 #docker build uri#ref:dir
-                docker build https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile -t carts_image:latest
+                mongo-db-ip=${'$'}(ping -c 1 mongo-db | awk 'NR==1{print ${'$'}3}'| tr -d '('| tr -d ')')
+                
+                docker build --no-cache --build-arg MONGO-DB_IP=${'$'}mongo-db-ip https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile -t carts_image:latest
             """.trimIndent())
             param("jetbrains.buildServer.deployer.targetUrl", "web")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
