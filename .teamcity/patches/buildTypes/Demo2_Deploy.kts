@@ -22,7 +22,6 @@ create(RelativeId("Demo2"), BuildType({
     steps {
         script {
             name = "terraform"
-            enabled = false
             scriptContent = """
                 sudo yum -y install git;
                 sudo yum -y install unzip;
