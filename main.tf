@@ -92,7 +92,7 @@ resource "google_compute_firewall" "allow-http" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "8081"]
+    ports    = ["80", "8080", "8081", "8089"]
   }
 
   allow {
@@ -128,3 +128,31 @@ resource "null_resource" "provision" {
     command = "sleep 10; ansible-playbook provision_install_Docker.yml -vvvv" 
   }
 } 
+
+resource "null_resource" "web_prov" {
+ 
+  depends_on = [null_resource.provision]
+
+# connection for the work of service providers after installing and configuring the OS
+  connection {
+    host        = "${google_compute_instance.web.network_interface.0.access_config.0.nat_ip}"
+    type        = "ssh"
+    user        = "${var.ssh_user}"
+    agent       = false
+    private_key = "${file(var.private_key_path)}"
+  }
+  
+ # Copy sh provision script
+  provisioner "file" {
+    source      = "./files/web_install.sh"
+    destination = "/tmp/web_install.sh"   
+ } 
+
+  provisioner "remote-exec" {
+  
+    inline = [
+      "sudo chmod +x /tmp/web_install.sh",
+      "sudo /bin/bash /tmp/web_install.sh"
+    ]
+  }
+}
