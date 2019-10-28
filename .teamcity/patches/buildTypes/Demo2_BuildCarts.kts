@@ -70,7 +70,6 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Start carts service"
             type = "ssh-exec-runner"
-            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", "sudo systemctl start carts")
             param("jetbrains.buildServer.deployer.targetUrl", "web")
