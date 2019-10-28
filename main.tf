@@ -99,23 +99,23 @@ resource "google_compute_firewall" "allow-http" {
   }
 }
 
-resource "google_compute_firewall" "allow-ssh" {
-  depends_on = [google_compute_instance.web, google_compute_instance.mongo-db]
-  name    = "ssh-firewall"
-  network = var.network
+#resource "google_compute_firewall" "allow-ssh" {
+#  depends_on = [google_compute_instance.web, google_compute_instance.mongo-db]
+#  name    = "ssh-firewall"
+#  network = var.network
 
-  #target_tags = google_compute_instance.web.tags
-  target_tags = ["web", "mongo-db"]
+#  #target_tags = google_compute_instance.web.tags
+#  target_tags = ["web", "mongo-db"]
 
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
+#  allow {
+#    protocol = "tcp"
+#    ports    = ["22"]
+#  }
 
-  allow {
-    protocol = "icmp"
-  }
-}
+#  allow {
+#    protocol = "icmp"
+#  }
+#}
 
 
 resource "null_resource" "mongodb_prov" {
