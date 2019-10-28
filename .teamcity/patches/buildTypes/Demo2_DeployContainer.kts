@@ -2,7 +2,6 @@ package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -19,9 +18,14 @@ create(RelativeId("Demo2"), BuildType({
     }
 
     steps {
-        script {
+        step {
             name = "Run mongodb3.4"
-            scriptContent = "docker -H ssh://taras@mongo-db run -d mongo:3.4 -p 27017:27017"
+            type = "ssh-exec-runner"
+            param("jetbrains.buildServer.deployer.username", "taras")
+            param("jetbrains.buildServer.sshexec.command", "docker run -d mongo:3.4 -p 27017:27017")
+            param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
+            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
+            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
     }
 }))
