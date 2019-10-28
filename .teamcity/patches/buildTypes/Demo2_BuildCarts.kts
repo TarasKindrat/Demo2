@@ -47,6 +47,14 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.ssh.transport", "jetbrains.buildServer.deployer.ssh.transport.scp")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
+        script {
+            name = "Create carts image"
+            workingDir = "/home/taras/carts"
+            scriptContent = """
+                #docker build uri#ref:dir
+                docker build https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile -t carts_image:latest
+            """.trimIndent()
+        }
         step {
             name = "Start carts service"
             type = "ssh-exec-runner"
@@ -56,14 +64,6 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.targetUrl", "web")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
-        }
-        script {
-            name = "Create carts image"
-            workingDir = "/home/taras/carts"
-            scriptContent = """
-                #docker build uri#ref:dir
-                docker build https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile -t carts_image:latest
-            """.trimIndent()
         }
     }
 
