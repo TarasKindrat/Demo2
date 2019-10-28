@@ -54,7 +54,6 @@ create(RelativeId("Demo2"), BuildType({
         }
         script {
             name = "Destroy web and mongo-db"
-            enabled = false
             executionMode = BuildStep.ExecutionMode.RUN_ON_FAILURE
             scriptContent = """
                 cd Demo2
