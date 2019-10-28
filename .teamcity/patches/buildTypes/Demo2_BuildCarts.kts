@@ -65,6 +65,14 @@ create(RelativeId("Demo2"), BuildType({
                 docker build https://github.com/TarasKindrat/Demo2.git#master:Carts_Dockerfile
             """.trimIndent()
         }
+        script {
+            name = "Create carts image"
+            workingDir = "/opt"
+            scriptContent = """
+                #docker build uri#ref:dir
+                docker build https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile carts_image
+            """.trimIndent()
+        }
     }
 
     triggers {
