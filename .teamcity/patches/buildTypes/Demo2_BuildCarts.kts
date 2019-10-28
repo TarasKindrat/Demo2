@@ -56,16 +56,6 @@ create(RelativeId("Demo2"), BuildType({
             """.trimIndent()
         }
         step {
-            name = "Start carts service"
-            type = "ssh-exec-runner"
-            enabled = false
-            param("jetbrains.buildServer.deployer.username", "taras")
-            param("jetbrains.buildServer.sshexec.command", "sudo systemctl start carts")
-            param("jetbrains.buildServer.deployer.targetUrl", "web")
-            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
-            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
-        }
-        step {
             name = "Run carts like container"
             type = "ssh-exec-runner"
             param("jetbrains.buildServer.deployer.username", "taras")
@@ -73,6 +63,16 @@ create(RelativeId("Demo2"), BuildType({
                 cd /home/taras/carts;
                 docker run -d — name carts -p 8081:8081 carts_image
             """.trimIndent())
+            param("jetbrains.buildServer.deployer.targetUrl", "web")
+            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
+            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
+        }
+        step {
+            name = "Start carts service"
+            type = "ssh-exec-runner"
+            enabled = false
+            param("jetbrains.buildServer.deployer.username", "taras")
+            param("jetbrains.buildServer.sshexec.command", "sudo systemctl start carts")
             param("jetbrains.buildServer.deployer.targetUrl", "web")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
