@@ -69,7 +69,7 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
         script {
-            name = "Create carts image (1) (1)"
+            name = "Create carts image"
             workingDir = "/home/taras/carts"
             scriptContent = """
                 #docker build uri#ref:dir
