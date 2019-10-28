@@ -21,7 +21,7 @@ create(RelativeId("Demo2"), BuildType({
     steps {
         script {
             name = "Run mongodb3.4"
-            scriptContent = """docker -H ssh -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no"://taras@mongo-db run -d mongo:3.4 -p 27017:27017"""
+            scriptContent = "docker -H ssh://taras@mongo-db run -d mongo:3.4 -p 27017:27017"
         }
     }
 }))
