@@ -65,7 +65,6 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Check Docker version mongo-db"
             type = "ssh-exec-runner"
-            enabled = false
             executionMode = BuildStep.ExecutionMode.ALWAYS
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", "docker --version")
