@@ -32,6 +32,7 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Stop carts service"
             type = "ssh-exec-runner"
+            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", "sudo systemctl stop carts")
             param("jetbrains.buildServer.deployer.targetUrl", "web")
