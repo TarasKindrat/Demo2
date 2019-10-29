@@ -63,6 +63,7 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Create carts image"
             type = "ssh-exec-runner"
+            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 #docker build uri#ref:dir
