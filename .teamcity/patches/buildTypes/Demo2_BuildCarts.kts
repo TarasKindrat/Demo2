@@ -96,6 +96,19 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
+        step {
+            name = "Start carts container"
+            type = "ssh-exec-runner"
+            param("jetbrains.buildServer.deployer.username", "taras")
+            param("jetbrains.buildServer.sshexec.command", """
+                if [ ! -n  docker ps -qf "name=carts" ]; then
+                   docker start ${'$'}(docker ps -aqf "name=carts")
+                fi
+            """.trimIndent())
+            param("jetbrains.buildServer.deployer.targetUrl", "web")
+            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
+            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
+        }
     }
 
     triggers {
