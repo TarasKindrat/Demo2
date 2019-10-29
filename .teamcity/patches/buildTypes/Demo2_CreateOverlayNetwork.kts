@@ -25,9 +25,21 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.sshexec.command", """
                 # Get web's inernal IP
                 self_ip=${'$'}(ifconfig |grep 'inet 10'|cut -d' ' -f10);
-                swarm_token=${'$'}(docker swarm init --advertise-addr=${'$'}self_ip awk 'NR==3{print ${'$'}0}'| tr -d ' ');
+                swarm_token=${'$'}(docker swarm init --advertise-addr=${'$'}self_ip awk 'NR==3{print ${'$'}0}'| tr -d 'docker ');
                 # Set teamcity environment variable
                 echo "##teamcity[setParameter name='env.SWARM_TOKEN' value=${'$'}swarm_token]"
+            """.trimIndent())
+            param("jetbrains.buildServer.deployer.targetUrl", "web")
+            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
+            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
+        }
+        step {
+            name = "Overlay on mongo-db"
+            type = "ssh-exec-runner"
+            param("jetbrains.buildServer.deployer.username", "taras")
+            param("jetbrains.buildServer.sshexec.command", """
+               # Join to swarm
+               docker $(echo %env.SWARM_TOKEN%);
             """.trimIndent())
             param("jetbrains.buildServer.deployer.targetUrl", "web")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
