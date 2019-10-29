@@ -31,7 +31,6 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Stop carts container"
             type = "ssh-exec-runner"
-            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 if [ -n  ${'$'}(docker ps | awk '{print ${'$'}NF}' | grep -w carts) ]; then
