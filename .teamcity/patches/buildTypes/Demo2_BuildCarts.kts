@@ -27,20 +27,6 @@ create(RelativeId("Demo2"), BuildType({
             goals = "clean test package"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
             jdkHome = "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.x86_64/jre"
-        } 
-        step {
-            name = "Stop carts container"
-            type = "ssh-exec-runner"
-            enabled = true
-            param("jetbrains.buildServer.deployer.username", "taras")
-            param("jetbrains.buildServer.sshexec.command", """
-                if [-n  docker ps -qf "name=carts"]; then
-                 docker stop $(docker ps -qf "name=carts")
-                fi 
-            """.trimIndent())
-            param("jetbrains.buildServer.deployer.targetUrl", "web")
-            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
-            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
         step {
             name = "Stop carts service"
@@ -88,19 +74,6 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
         step {
-            name = "Start carts container"
-            type = "ssh-exec-runner"
-            enabled = true
-            param("jetbrains.buildServer.deployer.username", "taras")
-            param("jetbrains.buildServer.sshexec.command", """
-                if [! -n  docker ps -qf "name=carts"]; then
-                 docker start $(docker ps -aqf "name=carts")
-                fi 
-            param("jetbrains.buildServer.deployer.targetUrl", "web")
-            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
-            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
-        }
-        step {
             name = "Start carts service"
             type = "ssh-exec-runner"
             enabled = false
@@ -114,6 +87,12 @@ create(RelativeId("Demo2"), BuildType({
 
     triggers {
         vcs {
+        }
+    }
+
+    dependencies {
+        snapshot(RelativeId("Demo2_DeployContainer")) {
+            onDependencyFailure = FailureAction.CANCEL
         }
     }
 }))
