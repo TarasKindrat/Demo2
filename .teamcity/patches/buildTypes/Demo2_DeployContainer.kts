@@ -21,7 +21,6 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Run mongodb3.4 like carts-db"
             type = "ssh-exec-runner"
-            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", "docker run -d --restart unless-stopped --name carts-db --network custom-overlay mongo:3.4")
             param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
