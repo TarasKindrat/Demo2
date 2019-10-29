@@ -27,7 +27,7 @@ create(RelativeId("Demo2"), BuildType({
                 #self_ip=${'$'}(ifconfig | grep 'inet 10' | cut -d' ' -f10);
                 swarm_token=${'$'}(docker swarm init --advertise-addr=${'$'}self_ip | awk 'NR==5{print ${'$'}0}'| tr -d '"docker"');
                 
-                #swarm_token=${'$'}(docker swarm init | awk 'NR==5{print ${'$'}0}' | cut -f 1 -d ' ' --complement);
+                #swarm_token=${'$'}(docker swarm init | awk 'NR==5{print ${'$'}0}' | awk '{${'$'}1=""; print ${'$'}0}';
                 echo "Swarm token is ${'$'}swarm_token"
                 # Set teamcity environment variable
                 echo "##teamcity[setParameter name='env.SWARM_TOKEN' value='${'$'}swarm_token']"
