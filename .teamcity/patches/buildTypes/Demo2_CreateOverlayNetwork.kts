@@ -46,7 +46,7 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 # Join to swarm
-                docker swarm join ${'$'}(echo %env.BUILD_NUMBER%env.SWARM_TOKEN%);
+                docker swarm join ${'$'}(echo %env.SWARM_TOKEN%);
             """.trimIndent())
             param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
