@@ -32,6 +32,20 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
+        step {
+            name = "Build and deploy  front-end"
+            type = "ssh-exec-runner"
+            param("jetbrains.buildServer.deployer.username", "taras")
+            param("jetbrains.buildServer.sshexec.command", """
+                git clone https://github.com/TarasKindrat/front-end.git;
+                cd front-end;
+                docker build --no-cache -t front-end_image:latest .
+                docker run -d --restart unless-stopped --name front-end --network custom-overlay -p 80:8079 front-end_image:latest
+            """.trimIndent())
+            param("jetbrains.buildServer.deployer.targetUrl", "web")
+            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
+            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
+        }
     }
 
     triggers {
