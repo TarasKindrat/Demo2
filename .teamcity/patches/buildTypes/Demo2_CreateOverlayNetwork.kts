@@ -33,7 +33,7 @@ create(RelativeId("Demo2"), BuildType({
                 swarm_token=${'$'}(docker swarm init | awk 'NR==5{print ${'$'}0}' | awk '{${'$'}1=${'$'}2=${'$'}3=""; print ${'$'}0}');
                 echo "Swarm token is ${'$'}swarm_token"
                 # Set teamcity environment variable
-                echo "##teamcity[setParameter name='env.SWARM_TOKEN' value='${'$'}swarm_token']"
+                "##teamcity[setParameter name='env.SWARM_TOKEN' value='${'$'}swarm_token']"
             """.trimIndent())
             param("jetbrains.buildServer.deployer.targetUrl", "web")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
