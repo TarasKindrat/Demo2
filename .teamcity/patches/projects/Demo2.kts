@@ -12,6 +12,6 @@ in the root project, and delete the patch script.
 create(DslContext.projectId, Project({
     id("Demo2")
     name = "Demo2"
-    buildTypesOrderIds = arrayListOf(RelativeId("Demo2_Deploy"), RelativeId("Demo2_Build"))
+    buildTypesOrderIds = arrayListOf(RelativeId("Demo2_Deploy"), RelativeId("Demo2_CreateOverlayNetwork"), RelativeId("Demo2_DeployContainer"), RelativeId("Demo2_BuildCarts"))
 }))
 
