@@ -113,11 +113,5 @@ create(RelativeId("Demo2"), BuildType({
         vcs {
         }
     }
-
-    dependencies {
-        snapshot(RelativeId("Demo2_DeployContainer")) {
-            onDependencyFailure = FailureAction.CANCEL
-        }
-    }
 }))
 
