@@ -24,9 +24,11 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 # Get web's inernal IP
-                ifconfig
-                self_ip=${'$'}(ifconfig | grep 'inet 10' | cut -d' ' -f10);
-                swarm_token=${'$'}(docker swarm init --advertise-addr=${'$'}self_ip | awk 'NR==3{print ${'$'}0}'| tr -d 'docker ');
+                #self_ip=${'$'}(ifconfig | grep 'inet 10' | cut -d' ' -f10);
+                #swarm_token=${'$'}(docker swarm init --advertise-addr=${'$'}self_ip | awk 'NR==3{print ${'$'}0}'| tr -d 'docker ');
+                
+                swarm_token=${'$'}(docker swarm init | awk 'NR==3{print ${'$'}0}'| tr -d 'docker ');
+                echo "Swarm token is ${'$'}swarm_token"
                 # Set teamcity environment variable
                 echo "##teamcity[setParameter name='env.SWARM_TOKEN' value='${'$'}swarm_token']"
             """.trimIndent())
