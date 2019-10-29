@@ -34,7 +34,7 @@ create(RelativeId("Demo2"), BuildType({
                 echo "Swarm token is ${'$'}swarm_token"
                 # Set teamcity environment variable
                 #"##teamcity[setParameter name='env.SWARM_TOKEN' value='${'$'}swarm_token']"
-                %env.SWARM_TOKEN%="${'$'}swarm_token"
+                %env.SWARM_TOKEN%='${'$'}swarm_token'
             """.trimIndent())
             param("jetbrains.buildServer.deployer.targetUrl", "web")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
