@@ -88,7 +88,7 @@ create(RelativeId("Demo2"), BuildType({
             type = "ssh-exec-runner"
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
-                if [-n  docker ps -qf "name=carts"]; then
+                if [ -n  docker ps -qf "name=carts" ]; then
                    docker stop ${'$'}(docker ps -qf "name=carts")
                 fi
             """.trimIndent())
