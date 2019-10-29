@@ -40,7 +40,11 @@ create(RelativeId("Demo2"), BuildType({
             name = "Run catalogue-db:0.3.0 like catalogue-db"
             type = "ssh-exec-runner"
             param("jetbrains.buildServer.deployer.username", "taras")
-            param("jetbrains.buildServer.sshexec.command", "docker run -d --restart unless-stopped --name catalogue-db --network custom-overlay weaveworksdemos/catalogue-db:0.3.0")
+            param("jetbrains.buildServer.sshexec.command", """
+                git clone https://github.com/TarasKindrat/catalogue.git;
+                docker build -f catalogue/docker/catalogue-db/Dockerfile -t catalogue-db:latest .
+                docker run -d --restart unless-stopped --name catalogue-db --network custom-overlay catalogue-db:latest
+            """.trimIndent())
             param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
