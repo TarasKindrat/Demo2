@@ -13,6 +13,10 @@ create(RelativeId("Demo2"), BuildType({
     id("Demo2_CreateOverlayNetwork")
     name = "Create overlay network"
 
+    params {
+        param("env.SWARM_TOKEN", """""""")
+    }
+
     vcs {
         root(DslContext.settingsRoot)
     }
