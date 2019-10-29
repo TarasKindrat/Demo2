@@ -25,7 +25,7 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 git clone https://github.com/TarasKindrat/catalogue.git;
-                docker build -f catalogue/docker/catalogue/Dockerfile -t catalogue:latest .
+                docker build --no-cache -f catalogue/docker/catalogue/Dockerfile -t catalogue:latest .
                 docker run -d --restart unless-stopped --name catalogue --network custom-overlay -p 8080:80 catalogue:latest
             """.trimIndent())
             param("jetbrains.buildServer.deployer.targetUrl", "web")
