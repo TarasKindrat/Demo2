@@ -67,7 +67,7 @@ create(RelativeId("Demo2"), BuildType({
             name = "Run carts like container"
             type = "ssh-exec-runner"
             param("jetbrains.buildServer.deployer.username", "taras")
-            param("jetbrains.buildServer.sshexec.command", "docker run -d --rm -v /home/taras/carts:/opt --name carts -p 8081:80 carts_image")
+            param("jetbrains.buildServer.sshexec.command", "docker run -d --restart unless-stopped -v /home/taras/carts:/opt --name carts --network custom-overlay -p 8081:80 carts_image:latest")
             param("jetbrains.buildServer.deployer.targetUrl", "web")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
