@@ -53,7 +53,6 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Upload carts to remote web host"
             type = "ssh-deploy-runner"
-            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.deployer.sourcePath", "target/carts.jar")
             param("jetbrains.buildServer.deployer.targetUrl", "web:/home/taras/carts")
