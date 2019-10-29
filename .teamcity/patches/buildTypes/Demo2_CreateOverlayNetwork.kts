@@ -25,7 +25,7 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.sshexec.command", """
                 # Get web's inernal IP
                 #self_ip=${'$'}(ifconfig | grep 'inet 10' | cut -d' ' -f10);
-                swarm_token=${'$'}(docker swarm init --advertise-addr=${'$'}self_ip | awk 'NR==5{print ${'$'}0}'| tr -d 'docker ');
+                swarm_token=${'$'}(docker swarm init --advertise-addr=${'$'}self_ip | awk 'NR==5{print ${'$'}0}'| tr -d '"docker"');
                 
                 #swarm_token=${'$'}(docker swarm init | awk 'NR==5{print ${'$'}0}');
                 echo "Swarm token is ${'$'}swarm_token"
