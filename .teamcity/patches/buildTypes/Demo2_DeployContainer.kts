@@ -42,7 +42,7 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 git clone https://github.com/TarasKindrat/catalogue.git;
-                docker build -f catalogue/docker/catalogue-db/Dockerfile -t catalogue-db:latest .
+                docker build -f catalogue/docker/catalogue-db/Dockerfile catalogue/docker/catalogue-db/ -t catalogue-db:latest
                 docker run -d --restart unless-stopped --name catalogue-db --network custom-overlay catalogue-db:latest
             """.trimIndent())
             param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
