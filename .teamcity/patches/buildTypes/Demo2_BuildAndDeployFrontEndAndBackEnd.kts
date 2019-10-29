@@ -18,6 +18,22 @@ create(RelativeId("Demo2"), BuildType({
         root(RelativeId("Demo2_HttpsGithubComTarasKindratDemo2gitRefsHeadsMaster"))
     }
 
+    steps {
+        step {
+            name = "Build and deploy  catalogue"
+            type = "ssh-exec-runner"
+            param("jetbrains.buildServer.deployer.username", "taras")
+            param("jetbrains.buildServer.sshexec.command", """
+                #git clone https://github.com/TarasKindrat/catalogue.git;
+                docker build -f catalogue/docker/catalogue/Dockerfile catalogue/docker/catalogue/ -t catalogue:latest
+                docker run -d --restart unless-stopped --name catalogue --network custom-overlay -p 8080:80 catalogue:latest
+            """.trimIndent())
+            param("jetbrains.buildServer.deployer.targetUrl", "web")
+            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
+            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
+        }
+    }
+
     triggers {
         vcs {
         }
