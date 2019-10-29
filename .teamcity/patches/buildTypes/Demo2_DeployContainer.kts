@@ -11,7 +11,7 @@ in the project with id = 'Demo2', and delete the patch script.
 */
 create(RelativeId("Demo2"), BuildType({
     id("Demo2_DeployContainer")
-    name = "Deploy_container"
+    name = "Deploy databace's containers"
 
     vcs {
         root(DslContext.settingsRoot)
