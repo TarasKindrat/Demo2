@@ -34,8 +34,8 @@ create(RelativeId("Demo2"), BuildType({
             enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
-                if [ -n  ${'$'}(docker ps -qf "name=carts") ]; then
-                   docker stop ${'$'}(docker ps -qf "name=carts")
+                if [ -n  ${'$'}(docker ps | awk '{print ${'$'}NF}' | grep -w carts) ]; then
+                   docker stop carts
                 fi
             """.trimIndent())
             param("jetbrains.buildServer.deployer.targetUrl", "web")
