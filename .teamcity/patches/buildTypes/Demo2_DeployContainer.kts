@@ -27,6 +27,15 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
+        step {
+            name = "Run mongodb3.4 like orders-db"
+            type = "ssh-exec-runner"
+            param("jetbrains.buildServer.deployer.username", "taras")
+            param("jetbrains.buildServer.sshexec.command", "docker run -d --restart unless-stopped --name orders-db --network custom-overlay mongo:3.4")
+            param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
+            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
+            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
+        }
     }
 }))
 
