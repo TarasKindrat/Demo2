@@ -19,7 +19,7 @@ create(RelativeId("Demo2"), BuildType({
 
     steps {
         step {
-            name = "Overlay on web"
+            name = "Swarm for overlay on web"
             type = "ssh-exec-runner"
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
@@ -34,17 +34,29 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
         step {
-            name = "Overlay on mongo-db"
+            name = "Swarm for overlay on mongo-db"
             type = "ssh-exec-runner"
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
-               # Join to swarm
-               docker $(echo %env.SWARM_TOKEN%);
+                # Join to swarm
+                docker $(echo %env.SWARM_TOKEN%);
+            """.trimIndent())
+            param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
+            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
+            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
+        }
+        step {
+            name = "Create Overlay (custom-overlay) on web"
+            type = "ssh-exec-runner"
+            param("jetbrains.buildServer.deployer.username", "taras")
+            param("jetbrains.buildServer.sshexec.command", """
+                docker network create --driver=overlay --attachable custom-overlay;
+                docker network ls
             """.trimIndent())
             param("jetbrains.buildServer.deployer.targetUrl", "web")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
-        }
+        }        
     }
 }))
 
