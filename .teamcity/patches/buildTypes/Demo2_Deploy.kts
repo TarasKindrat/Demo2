@@ -45,6 +45,8 @@ create(RelativeId("Demo2"), BuildType({
                 git clone -b terraformInstances https://github.com/TarasKindrat/Demo2.git;
                 cd Demo2;
                 sudo terraform init;
+                # The terraform fmt command is used to rewrite Terraform configuration files 
+                #to a canonical format and style.
                 sudo terraform fmt;
                 sudo terraform plan;
                 sudo terraform apply -auto-approve;
