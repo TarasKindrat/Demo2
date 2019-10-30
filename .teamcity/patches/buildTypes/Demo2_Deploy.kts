@@ -23,7 +23,7 @@ create(RelativeId("Demo2"), BuildType({
         script {
             name = "terraform"
             scriptContent = """
-                sudo yum -y install git;
+                #sudo yum -y install git;
                 sudo yum -y install unzip;
                 sudo yum -y install unzip;
                 # check if not exist
