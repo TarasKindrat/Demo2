@@ -82,6 +82,15 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
+        step {
+            name = "Install git on mongo-db"
+            type = "ssh-exec-runner"
+            param("jetbrains.buildServer.deployer.username", "taras")
+            param("jetbrains.buildServer.sshexec.command", "sudo yum -y install git")
+            param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
+            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
+            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
+        }
     }
 }))
 
