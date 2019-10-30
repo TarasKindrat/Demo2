@@ -22,7 +22,6 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Build and deploy  catalogue"
             type = "ssh-exec-runner"
-            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 git clone https://github.com/TarasKindrat/catalogue.git;
