@@ -38,11 +38,14 @@
         groups: docker
         append: yes
     
-      
-    - name: Installing development-tools
+    - name: Install the 'Development tools' package group
+      yum:
+        name: "@Development tools"
+        state: present  
+    
+    - name: Install additional tools
       yum:
         name:
-          - "@development-tools"
           - gettext-devel
           - openssl-devel
           - perl-CPAN
@@ -53,13 +56,11 @@
     
     - name: remove old git 
       yum:
-        name:
-          - git
+        name: git
         state: absent
         
     - name: Install git2u
       yum:
-        name:
-          - git2u-all
+        name: git2u-all
         state: latest
 
