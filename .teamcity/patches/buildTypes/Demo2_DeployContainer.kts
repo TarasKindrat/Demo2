@@ -57,7 +57,7 @@ create(RelativeId("Demo2"), BuildType({
             type = "ssh-exec-runner"
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
-                git https://github.com/TarasKindrat/user.git;
+                git clone https://github.com/TarasKindrat/user.git;
                 docker build -f user/docker/user-db/Dockerfile user/docker/user-db/ -t user-db_image:latest
                 docker run -d --restart unless-stopped --name user-db --network custom-overlay user-db_image:latest
             """.trimIndent())
