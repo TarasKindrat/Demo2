@@ -85,6 +85,7 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Install git on mongo-db"
             type = "ssh-exec-runner"
+            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", "sudo yum -y install git")
             param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
