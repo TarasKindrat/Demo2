@@ -36,7 +36,6 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Build and deploy  front-end"
             type = "ssh-exec-runner"
-            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 git clone https://github.com/TarasKindrat/front-end.git;
