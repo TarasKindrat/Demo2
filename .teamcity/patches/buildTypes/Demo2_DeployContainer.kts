@@ -48,6 +48,19 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
+        }              }
+        step {
+            name = "Run user-db like catalogue-db"
+            type = "ssh-exec-runner"
+            param("jetbrains.buildServer.deployer.username", "taras")
+            param("jetbrains.buildServer.sshexec.command", """
+                git https://github.com/TarasKindrat/user.git;
+                docker build -f user/docker/user-db/Dockerfile user/docker/user-db/ -t user-db_image:latest
+                docker run -d --restart unless-stopped --name user-db --network custom-overlay user-db_image:latest
+            """.trimIndent())
+            param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
+            param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
+            param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
     }
 }))
