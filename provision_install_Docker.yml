@@ -37,3 +37,29 @@
         name: taras
         groups: docker
         append: yes
+    
+      
+    - name: Installing development-tools
+      yum:
+        name:
+          - "@development-tools"
+          - gettext-devel
+          - openssl-devel
+          - perl-CPAN
+          - perl-devel
+          - zlib-devel
+          - https://centos7.iuscommunity.org/ius-release.rpm
+        state: latest
+    
+    - name: remove old git 
+      yum:
+        name:
+          - git
+        state: absent
+        
+    - name: Install git2u
+      yum:
+        name:
+          - git2u-all
+        state: latest
+

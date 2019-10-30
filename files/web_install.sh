@@ -1,8 +1,8 @@
-echo "install latest git versin"
+#echo "install latest git versin"
 sudo yum -y groupinstall "Development Tools";
 sudo yum -y install gettext-devel openssl-devel perl-CPAN perl-devel zlib-devel;
 sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm;
-# remove old version if exist
+#remove old version if exist
 sudo yum -y remove git;
 sudo yum -y install git2u-all;
 
