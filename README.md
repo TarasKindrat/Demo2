@@ -1,4 +1,4 @@
 # Demo2
-- use Terraform to create infrastructure
-- use Ansible to install Docker
-- use Docker to build and run apps from microservices-demo 
+- use Terraform from Teamcity to create infrastructure
+- use Ansible to install Docker (Terraform provision)
+- use Teamcity to build and run apps from microservices-demo 
