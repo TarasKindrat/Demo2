@@ -2,6 +2,7 @@ package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -57,6 +58,14 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
+        }
+        script {
+            name = "catalogue-db"
+            workingDir = "/home/taras/"
+            scriptContent = """
+                git clone https://github.com/TarasKindrat/catalogue.git;
+                docker build -f catalogue/docker/catalogue-db/Dockerfile catalogue/docker/catalogue-db/ -t catalogue-db:latest
+            """.trimIndent()
         }
     }
 }))
