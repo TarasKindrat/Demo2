@@ -60,7 +60,7 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
         script {
-            name = "catalogue-db"
+            name = "Build catalogue-db"
             workingDir = "/home/taras/"
             scriptContent = """
                 git clone https://github.com/TarasKindrat/catalogue.git;
