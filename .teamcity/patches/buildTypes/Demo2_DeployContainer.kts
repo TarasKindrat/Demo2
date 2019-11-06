@@ -76,15 +76,11 @@ create(RelativeId("Demo2"), BuildType({
         dockerCommand {
             commandType = build {
                 source = url {
-                    url = "https://github.com/TarasKindrat/user/tree/master/docker/user-db/Deckerfile"
+                    url = "git@github.com/TarasKindrat/user/tree/master/docker/user-db/Deckerfile"
                 }
                 namesAndTags = "%build.number%"
             }
             param("dockerImage.platform", "linux")
-            param("dockerfile.content", """
-                #it clone https://github.com/TarasKindrat/userdocker/user-db/Dockerfile
-                docker build -f user/docker/user-db/Dockerfile https://github.com/TarasKindrat/user.git -t user-db_image:%build.number%
-            """.trimIndent())
         }
     }
 }))
