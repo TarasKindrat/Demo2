@@ -2,7 +2,6 @@ package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.dockerCommand
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
@@ -75,15 +74,15 @@ create(RelativeId("Demo2"), BuildType({
                 docker build -f catalogue/docker/catalogue-db/Dockerfile catalogue/docker/catalogue-db/ -t catalogue-db:%build.number%
             """.trimIndent()
         }
-        dockerCommand {
-            commandType = build {
-                source = url {
-                    url = "https://github.com/TarasKindrat/user/tree/master/docker/user-db/"
-                }
-                namesAndTags = "%build.number%"
-                commandArgs = "--pull"
-            }
-            param("dockerImage.platform", "linux")
+        script {
+            name = "build user-db"
+            scriptContent = """
+                git clone https://github.com/TarasKindrat/user.git;
+                docker build -f user/docker/user-db/Dockerfile user/docker/user-db/ -t user-db_image:%build.number%;
+                docker tag user-db_image gcr.io/demo2-256511/user-db_image:latest;
+                docker push gcr.io/demo2-256511/user-db_image:%build.number%;
+                ocker push gcr.io/demo2-256511/user-db_image:latest;
+            """.trimIndent()
         }
     }
 }))
