@@ -72,7 +72,7 @@ create(RelativeId("Demo2"), BuildType({
             workingDir = "/home/taras/"
             scriptContent = """
                 git clone https://github.com/TarasKindrat/catalogue.git;
-                docker build -f catalogue/docker/catalogue-db/Dockerfile catalogue/docker/catalogue-db/ -t catalogue-db:latest
+                docker build -f catalogue/docker/catalogue-db/Dockerfile catalogue/docker/catalogue-db/ -t catalogue-db:%build.number%
             """.trimIndent()
         }
         dockerCommand {
