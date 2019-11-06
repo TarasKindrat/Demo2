@@ -78,9 +78,10 @@ create(RelativeId("Demo2"), BuildType({
         dockerCommand {
             commandType = build {
                 source = url {
-                    url = "git@github.com/TarasKindrat/user/tree/master/docker/user-db/Deckerfile"
+                    url = "git@https://github.com/TarasKindrat/user/tree/master/docker/user-db/Deckerfile"
                 }
                 namesAndTags = "%build.number%"
+                commandArgs = "--pull"
             }
             param("dockerImage.platform", "linux")
         }
