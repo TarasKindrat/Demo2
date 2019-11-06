@@ -14,6 +14,8 @@ create(RelativeId("Demo2"), BuildType({
     id("Demo2_DeployContainer")
     name = "Deploy databace's containers"
 
+    buildNumberPattern = "0.1%build.counter%"
+
     vcs {
         root(DslContext.settingsRoot)
     }
