@@ -54,6 +54,7 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Run user-db"
             type = "ssh-exec-runner"
+            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 git clone https://github.com/TarasKindrat/user.git;
