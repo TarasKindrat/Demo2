@@ -78,7 +78,7 @@ create(RelativeId("Demo2"), BuildType({
         dockerCommand {
             commandType = build {
                 source = url {
-                    url = "https://github.com/TarasKindrat/user/tree/master/docker/user-db/Dockerfile"
+                    url = "https://github.com/TarasKindrat/user/tree/master/docker/user-db/"
                 }
                 namesAndTags = "%build.number%"
                 commandArgs = "--pull"
