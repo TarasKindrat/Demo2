@@ -45,6 +45,7 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Run catalogue-db:0.3.0 like catalogue-db"
             type = "ssh-exec-runner"
+            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", "docker run -d --restart unless-stopped --name catalogue-db --network custom-overlay catalogue-db:latest")
             param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
