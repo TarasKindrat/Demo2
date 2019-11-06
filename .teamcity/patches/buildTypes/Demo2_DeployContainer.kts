@@ -64,6 +64,7 @@ create(RelativeId("Demo2"), BuildType({
         }
         script {
             name = "Build catalogue-db"
+            enabled = false
             workingDir = "/home/taras/"
             scriptContent = """
                 git clone https://github.com/TarasKindrat/catalogue.git;
