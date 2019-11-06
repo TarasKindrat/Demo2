@@ -78,8 +78,8 @@ create(RelativeId("Demo2"), BuildType({
             name = "build user-db"
             scriptContent = """
                 git clone https://github.com/TarasKindrat/user.git;
-                docker build -f user/docker/user-db/Dockerfile user/docker/user-db/ -t user-db_image:%build.number%;
-                docker tag user-db_image:%build.number% gcr.io/demo2-256511/user-db_image:latest;
+                docker build -f user/docker/user-db/Dockerfile user/docker/user-db/ -t user-db_image;
+                docker tag user-db_image gcr.io/demo2-256511/user-db_image::%build.number%;
                 docker push gcr.io/demo2-256511/user-db_image:%build.number%;
                 docker push gcr.io/demo2-256511/user-db_image:latest;
             """.trimIndent()
