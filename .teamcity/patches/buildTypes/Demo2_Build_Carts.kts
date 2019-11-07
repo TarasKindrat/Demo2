@@ -26,11 +26,13 @@ create(RelativeId("Demo2"), BuildType({
             name = "Download and build docker_image"
             workingDir = "/home/taras/carts2"
             scriptContent = """
-                if [ -d carts ]; then
-                   sudo rm -R carts;
-                fi
-                git clone https://github.com/TarasKindrat/carts.git;
-                docker build -f carts/Dockerfile carts/ -t carts_image;
+                #if [ -d carts ]; then
+                #   sudo rm -R carts;
+                #fi
+                #git clone https://github.com/TarasKindrat/carts.git;
+                #docker build -f carts/Dockerfile carts/ -t carts_image;
+                
+                docker build https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile -t carts_image
             """.trimIndent()
         }
         script {
