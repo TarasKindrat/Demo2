@@ -24,6 +24,7 @@ create(RelativeId("Demo2"), BuildType({
     steps {
         script {
             name = "Download and build docker_image"
+            workingDir = "/home/taras/carts2"
             scriptContent = """
                 #if [ -d carts ]; then
                 #   sudo rm -R carts;
