@@ -64,6 +64,15 @@ create(RelativeId("Demo2"), BuildType({
                 docker rmi gcr.io/demo2-256511/carts_image:latest;
             """.trimIndent()
         }
+        script {
+            name = "Download carts repo by git"
+            scriptContent = """
+                if [ -d carts ]; then
+                   sudo rm -R carts;
+                fi
+                git clone https://github.com/TarasKindrat/carts.git;
+            """.trimIndent()
+        }
     }
 
     triggers {
