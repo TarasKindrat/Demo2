@@ -29,6 +29,13 @@ create(RelativeId("Demo2"), BuildType({
                 docker build -f catalogue/docker/catalogue-db/Dockerfile catalogue/docker/catalogue-db/ -t catalogue-db_image;
             """.trimIndent()
         }
+        script {
+            name = "Tag image"
+            scriptContent = """
+                docker tag catalogue-db_image gcr.io/demo2-256511/catalogue-db_image:%build.number%;
+                docker tag catalogue-db_image gcr.io/demo2-256511/catalogue-db_image:latest;
+            """.trimIndent()
+        }
     }
 }))
 
