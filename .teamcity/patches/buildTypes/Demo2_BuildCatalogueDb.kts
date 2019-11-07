@@ -26,7 +26,7 @@ create(RelativeId("Demo2"), BuildType({
                    sudo rm -R catalogue;
                 fi
                 git clone https://github.com/TarasKindrat/catalogue.git;
-                docker build -f catalogue/docker/catalogue-db/Dockerfile catalogue/docker/catalogue-db/ -t catalogue-db;
+                docker build -f catalogue/docker/catalogue-db/Dockerfile catalogue/docker/catalogue-db/ -t catalogue-db_image;
             """.trimIndent()
         }
     }
