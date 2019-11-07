@@ -15,13 +15,28 @@ create(RelativeId("Demo2"), BuildType({
     id("Demo2_Build_Carts")
     name = "Build Carts"
 
-    buildNumberPattern = "0.0%build.counter%"
+   artifactRules = "target => target"
+    buildNumberPattern = "1.0.%build.counter%"
 
     vcs {
         root(RelativeId("Demo2_HttpsGithubComTarasKindratCartsGitRefsHeadsMaster"))
     }
 
     steps {
+        maven {
+            goals = "clean test package"
+            runnerArgs = "-Dmaven.test.failure.ignore=true"
+            jdkHome = "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.x86_64/jre"
+        }
+        script {
+            name = "Copy carts.jar"
+            scriptContent = """
+               # if [ -f /home/taras/carts/carts.jar ]; then
+               #    rm /home/taras/carts/carts.jar
+               # fi
+               # cp target/carts.jar /home/taras/carts
+            """.trimIndent()
+        }
         script {
             name = "Download and build docker_image"
             scriptContent = """
@@ -31,7 +46,7 @@ create(RelativeId("Demo2"), BuildType({
                 #git clone https://github.com/TarasKindrat/carts.git;
                 #docker build -f carts/Dockerfile carts/ -t carts_image;
                 
-                docker build https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile -t carts_image
+               docker build https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile -t carts_image
             """.trimIndent()
         }
         script {
