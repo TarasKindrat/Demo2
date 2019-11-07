@@ -36,6 +36,13 @@ create(RelativeId("Demo2"), BuildType({
                 docker tag catalogue-db_image gcr.io/demo2-256511/catalogue-db_image:latest;
             """.trimIndent()
         }
+        script {
+            name = "Push images to Container Registry"
+            scriptContent = """
+                docker push catalogue-db_image gcr.io/demo2-256511/catalogue-db_image:%build.number%;
+                docker push catalogue-db_image gcr.io/demo2-256511/catalogue-db_image:latest;
+            """.trimIndent()
+        }
     }
 }))
 
