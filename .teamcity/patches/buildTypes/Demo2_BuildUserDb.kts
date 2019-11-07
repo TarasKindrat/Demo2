@@ -27,6 +27,10 @@ create(RelativeId("Demo2"), BuildType({
                 docker build -f user/docker/user-db/Dockerfile user/docker/user-db/ -t user-db_image;
             """.trimIndent()
         }
+        script {
+            name = "Tag image"
+            scriptContent = "docker tag user-db_image gcr.io/demo2-256511/user-db_image:%build.number%;"
+        }
     }
 
     triggers {
