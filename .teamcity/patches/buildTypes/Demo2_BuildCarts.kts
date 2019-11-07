@@ -16,6 +16,7 @@ create(RelativeId("Demo2"), BuildType({
     name = "Maven_create_carts.jar"
 
     artifactRules = "target => target"
+    buildNumberPattern = "1.0.%build.counter%"
 
     vcs {
         root(RelativeId("Demo2_HttpsGithubComTarasKindratCartsGitRefsHeadsMaster"))
