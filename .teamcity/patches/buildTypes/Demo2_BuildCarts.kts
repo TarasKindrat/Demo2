@@ -31,6 +31,7 @@ create(RelativeId("Demo2"), BuildType({
         }
         script {
             name = "Copy carts.jar"
+            enabled = false
             scriptContent = """
                 if [ -f /home/taras/carts/carts.jar ]; then
                    rm /home/taras/carts/carts.jar
