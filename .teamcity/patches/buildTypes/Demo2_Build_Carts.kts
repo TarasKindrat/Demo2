@@ -28,7 +28,7 @@ create(RelativeId("Demo2"), BuildType({
                 if [ -d carts ]; then
                    sudo rm -R carts;
                 git clone https://github.com/TarasKindrat/carts.git;
-                docker build -f carts/Dockerfile carts -t carts_image;
+                docker build -f carts/Dockerfile carts/ -t carts_image;
             """.trimIndent()
         }
         script {
