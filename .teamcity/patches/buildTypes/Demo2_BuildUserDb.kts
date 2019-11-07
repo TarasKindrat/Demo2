@@ -31,6 +31,13 @@ create(RelativeId("Demo2"), BuildType({
             name = "Tag image"
             scriptContent = "docker tag user-db_image gcr.io/demo2-256511/user-db_image:%build.number%;"
         }
+        script {
+            name = "Push images to Container Registry"
+            scriptContent = """
+                docker push gcr.io/demo2-256511/user-db_image:%build.number%;
+                docker push gcr.io/demo2-256511/user-db_image:latest;
+            """.trimIndent()
+        }
     }
 
     triggers {
