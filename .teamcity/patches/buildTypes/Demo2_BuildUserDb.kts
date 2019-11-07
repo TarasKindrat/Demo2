@@ -25,6 +25,9 @@ create(RelativeId("Demo2"), BuildType({
         script {
             name = "Download and build docker_image"
             scriptContent = """
+                if [ -d user ]; then
+                   sudo rm -R user;
+                fi
                 git clone https://github.com/TarasKindrat/user.git;
                 docker build -f user/docker/user-db/Dockerfile user/docker/user-db/ -t user-db_image;
             """.trimIndent()
