@@ -47,6 +47,7 @@ create(RelativeId("Demo2"), BuildType({
             """.trimIndent()
         }
         script {
+            name = "Delete images from build server"
             scriptContent = """
                 docker rmi catalogue-db_image:latest;
                 docker rmi gcr.io/demo2-256511/catalogue-db_image:%build.number%;
