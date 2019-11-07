@@ -16,7 +16,6 @@ create(RelativeId("Demo2"), BuildType({
     id("Demo2_Build_Carts")
     name = "Build Carts"
 
-    artifactRules = "target => target"
     buildNumberPattern = "0.0%build.counter%"
 
     vcs {
@@ -69,12 +68,6 @@ create(RelativeId("Demo2"), BuildType({
     triggers {
         vcs {
             branchFilter = ""
-        }
-    }
-
-    dependencies {
-        snapshot(RelativeId("Demo2_BuildCarts")) {
-            onDependencyFailure = FailureAction.FAIL_TO_START
         }
     }
 }))
