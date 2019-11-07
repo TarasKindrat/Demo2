@@ -2,6 +2,7 @@ package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
+import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -15,6 +16,12 @@ create(RelativeId("Demo2"), BuildType({
 
     vcs {
         root(RelativeId("Demo2_UserGit"))
+    }
+
+    triggers {
+        vcs {
+            branchFilter = ""
+        }
     }
 }))
 
