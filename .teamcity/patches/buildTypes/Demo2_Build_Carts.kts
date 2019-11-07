@@ -19,6 +19,13 @@ create(RelativeId("Demo2"), BuildType({
             name = "Download and build docker_image"
             scriptContent = "docker build https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile -t carts_image"
         }
+        script {
+            name = "Tag image"
+            scriptContent = """
+                docker tag carts_image gcr.io/demo2-256511/carts_image:%build.number%;
+                docker tag carts_image gcr.io/demo2-256511/carts_image:latest;
+            """.trimIndent()
+        }
     }
 }))
 
