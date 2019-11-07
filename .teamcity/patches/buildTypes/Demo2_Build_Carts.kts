@@ -24,6 +24,15 @@ create(RelativeId("Demo2"), BuildType({
     }
 
     steps {
+        script {
+            name = "Download carts repo by git"
+            scriptContent = """
+                if [ -d carts ]; then
+                   sudo rm -R carts;
+                fi
+                git clone https://github.com/TarasKindrat/carts.git;
+            """.trimIndent()
+        }
         maven {
             name = "Create carts.jar"
             goals = "clean test package"
@@ -62,15 +71,6 @@ create(RelativeId("Demo2"), BuildType({
                 docker rmi carts_image:latest;
                 docker rmi gcr.io/demo2-256511/carts_image:%build.number%;
                 docker rmi gcr.io/demo2-256511/carts_image:latest;
-            """.trimIndent()
-        }
-        script {
-            name = "Download carts repo by git"
-            scriptContent = """
-                if [ -d carts ]; then
-                   sudo rm -R carts;
-                fi
-                git clone https://github.com/TarasKindrat/carts.git;
             """.trimIndent()
         }
     }
