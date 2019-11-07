@@ -15,6 +15,8 @@ create(RelativeId("Demo2"), BuildType({
     id("Demo2_BuildUserDb")
     name = "Build user-db"
 
+    buildNumberPattern = "0.0%build.counter%"
+
     vcs {
         root(RelativeId("Demo2_UserGit"))
     }
