@@ -28,6 +28,13 @@ create(RelativeId("Demo2"), BuildType({
                 docker tag carts_image gcr.io/demo2-256511/carts_image:latest;
             """.trimIndent()
         }
+        script {
+            name = "Push images to Container Registry"
+            scriptContent = """
+                docker push gcr.io/demo2-256511/carts_image:%build.number%;
+                docker push gcr.io/demo2-256511/carts_image:latest;
+            """.trimIndent()
+        }
     }
 }))
 
