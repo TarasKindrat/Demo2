@@ -115,5 +115,13 @@ create(RelativeId("Demo2"), BuildType({
         vcs {
         }
     }
+
+    features {
+        feature {
+            type = "JetBrains.AssemblyInfo"
+            param("file-format", "%build.number%")
+            param("assembly-format", "%build.number%")
+        }
+    }
 }))
 
