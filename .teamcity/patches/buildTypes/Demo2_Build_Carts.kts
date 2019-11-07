@@ -3,6 +3,7 @@ package patches.buildTypes
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -46,6 +47,12 @@ create(RelativeId("Demo2"), BuildType({
                 docker rmi gcr.io/demo2-256511/carts_image:%build.number%;
                 docker rmi gcr.io/demo2-256511/carts_image:latest;
             """.trimIndent()
+        }
+    }
+
+    triggers {
+        vcs {
+            branchFilter = ""
         }
     }
 
