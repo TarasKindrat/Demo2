@@ -2,6 +2,7 @@ package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -15,6 +16,19 @@ create(RelativeId("Demo2"), BuildType({
 
     vcs {
         root(RelativeId("Demo2_Catalogue"))
+    }
+
+    steps {
+        script {
+            name = "Download and build docker_image"
+            scriptContent = """
+                if [ -d catalogue ]; then
+                   sudo rm -R catalogue;
+                fi
+                git clone https://github.com/TarasKindrat/catalogue.git;
+                docker build -f catalogue/docker/catalogue-db/Dockerfile catalogue/docker/catalogue-db/ -t catalogue-db;
+            """.trimIndent()
+        }
     }
 }))
 
