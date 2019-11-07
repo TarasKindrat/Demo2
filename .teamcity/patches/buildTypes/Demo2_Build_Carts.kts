@@ -44,5 +44,11 @@ create(RelativeId("Demo2"), BuildType({
             """.trimIndent()
         }
     }
+
+    dependencies {
+        snapshot(RelativeId("Demo2_BuildCarts")) {
+            onDependencyFailure = FailureAction.FAIL_TO_START
+        }
+    }
 }))
 
