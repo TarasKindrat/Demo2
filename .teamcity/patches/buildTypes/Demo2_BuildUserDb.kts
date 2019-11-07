@@ -49,11 +49,11 @@ create(RelativeId("Demo2"), BuildType({
         script {
             name = "Delete images"
             scriptContent = """
-                docker images;
+                echo ${'$'}(docker images);
                 docker rmi user-db_image:latest;
                 docker rmi gcr.io/demo2-256511/user-db_image:%build.number%;
                 docker rmi gcr.io/demo2-256511/user-db_image:latest;
-                docker images;
+                echo ${'$'}(docker images);
             """.trimIndent()
         }
     }
