@@ -75,3 +75,7 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOM
 sudo yum -y install google-cloud-sdk
+echo "Activating GCR"
+gcloud auth activate-service-account  gcr-895@demo2-256511.iam.gserviceaccount.com --key-file=/home/taras/.ssh/gcr.json
+# Echo "Configuring docker"
+# gcloud auth configure-docker
