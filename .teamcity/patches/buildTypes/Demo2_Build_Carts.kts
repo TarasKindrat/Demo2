@@ -14,6 +14,8 @@ create(RelativeId("Demo2"), BuildType({
     id("Demo2_Build_Carts")
     name = "Build Carts"
 
+    buildNumberPattern = "0.0%build.counter%"
+
     steps {
         script {
             name = "Download and build docker_image"
@@ -24,21 +26,6 @@ create(RelativeId("Demo2"), BuildType({
             scriptContent = """
                 docker tag carts_image gcr.io/demo2-256511/carts_image:%build.number%;
                 docker tag carts_image gcr.io/demo2-256511/carts_image:latest;
-            """.trimIndent()
-        }
-        script {
-            name = "Push images to Container Registry"
-            scriptContent = """
-                docker push gcr.io/demo2-256511/carts_image:%build.number%;
-                docker push gcr.io/demo2-256511/carts_image:latest;
-            """.trimIndent()
-        }
-        script {
-            name = "Delete images from build server"
-            scriptContent = """
-                docker rmi carts_image:latest;
-                docker rmi gcr.io/demo2-256511/carts_image:%build.number%;
-                docker rmi gcr.io/demo2-256511/carts_image:latest;
             """.trimIndent()
         }
     }
