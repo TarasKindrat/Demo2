@@ -29,6 +29,15 @@ create(RelativeId("Demo2"), BuildType({
             runnerArgs = "-Dmaven.test.failure.ignore=true"
             jdkHome = "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.x86_64/jre"
         }
+        script {
+            name = "Copy carts.jar"
+            scriptContent = """
+                if [ -f /home/taras/carts/carts.jar ]; then
+                   rm /home/taras/carts/carts.jar
+                fi
+                cp target/carts.jar /home/taras/carts
+            """.trimIndent()
+        }
         step {
             name = "Stop carts container"
             type = "ssh-exec-runner"
@@ -113,15 +122,6 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.targetUrl", "web")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
-        }
-        script {
-            name = "Copy carts.jar"
-            scriptContent = """
-                if [ -f /home/taras/carts/carts.jar ]; then
-                   rm /home/taras/carts/carts.jar
-                fi
-                cp target/carts.jar /home/taras/carts
-            """.trimIndent()
         }
     }
 
