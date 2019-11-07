@@ -17,7 +17,7 @@ create(RelativeId("Demo2"), BuildType({
     steps {
         script {
             name = "Download and build docker_image"
-            scriptContent = "docker build https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile -t carts_image:latest"
+            scriptContent = "docker build https://github.com/TarasKindrat/Demo2.git#terraformInstances:Carts_Dockerfile -t carts_image"
         }
     }
 }))
