@@ -117,6 +117,7 @@ create(RelativeId("Demo2"), BuildType({
 
     triggers {
         vcs {
+            enabled = false
         }
     }
 
