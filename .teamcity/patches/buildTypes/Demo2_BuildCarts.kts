@@ -13,7 +13,7 @@ in the project with id = 'Demo2', and delete the patch script.
 */
 create(RelativeId("Demo2"), BuildType({
     id("Demo2_BuildCarts")
-    name = "Build_Carts"
+    name = "Maven_create_carts.jar"
 
     artifactRules = "target => target"
 
