@@ -16,6 +16,10 @@ create(RelativeId("Demo2"), BuildType({
 
     buildNumberPattern = "0.0%build.counter%"
 
+    vcs {
+        root(RelativeId("Demo2_HttpsGithubComTarasKindratCartsGitRefsHeadsMaster"))
+    }
+
     steps {
         script {
             name = "Download and build docker_image"
