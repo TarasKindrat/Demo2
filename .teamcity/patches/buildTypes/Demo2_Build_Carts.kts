@@ -38,7 +38,6 @@ create(RelativeId("Demo2"), BuildType({
             name = "Create carts.jar"
             goals = "clean test package"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
-            workingDir = "/home/taras/carts"
             jdkHome = "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.x86_64/jre"
         }
         script {
