@@ -74,6 +74,15 @@ create(RelativeId("Demo2"), BuildType({
                 docker rmi gcr.io/demo2-256511/carts_image:latest;
             """.trimIndent()
         }
+        script {
+            name = "Copy carts.jar"
+            scriptContent = """
+                if [ -f /home/taras/carts/carts/target/carts.jar ]; then
+                   rm /home/taras/carts/carts/target/carts.jar
+                fi
+                cp target/carts.jar /home/taras/carts/carts/target
+            """.trimIndent()
+        }
     }
 
     triggers {
