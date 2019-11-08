@@ -30,10 +30,10 @@ create(RelativeId("Demo2"), BuildType({
             """.trimIndent()
         }
         script {
-            name = "Tag image"
+            name = "Push images to Container Registry"
             scriptContent = """
-                docker tag catalogue_image gcr.io/demo2-256511/catalogue_image:%build.number%;
-                docker tag catalogue_image gcr.io/demo2-256511/catalogue_image:latest;
+                docker push gcr.io/demo2-256511/catalogue_image:%build.number%;
+                docker push gcr.io/demo2-256511/catalogue_image:latest;
             """.trimIndent()
         }
     }
