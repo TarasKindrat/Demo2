@@ -30,6 +30,13 @@ create(RelativeId("Demo2"), BuildType({
             """.trimIndent()
         }
         script {
+            name = "Tag image"
+            scriptContent = """
+                docker tag catalogue_image gcr.io/demo2-256511/catalogue_image:%build.number%;
+                docker tag catalogue_image gcr.io/demo2-256511/catalogue_image:latest;
+            """.trimIndent()
+        }
+        script {
             name = "Push images to Container Registry"
             scriptContent = """
                 docker push gcr.io/demo2-256511/catalogue_image:%build.number%;
@@ -42,13 +49,6 @@ create(RelativeId("Demo2"), BuildType({
                 docker rmi catalogue-db_image:latest;
                 docker rmi gcr.io/demo2-256511/catalogue_image:%build.number%;
                 docker rmi gcr.io/demo2-256511/catalogue_image:latest;
-            """.trimIndent()
-        }
-        script {
-            name = "Tag image"
-            scriptContent = """
-                docker tag catalogue_image gcr.io/demo2-256511/catalogue_image:%build.number%;
-                docker tag catalogue_image gcr.io/demo2-256511/catalogue_image:latest;
             """.trimIndent()
         }
     }
