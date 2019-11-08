@@ -2,6 +2,7 @@ package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -15,6 +16,19 @@ create(RelativeId("Demo2"), BuildType({
 
     vcs {
         root(RelativeId("Demo2_UserGit"))
+    }
+
+    steps {
+        script {
+            name = "Download and build docker_image"
+            scriptContent = """
+                if [ -d user ]; then
+                   sudo rm -R user;
+                fi
+                git clone https://github.com/TarasKindrat/user.git;
+                docker build --no-cache -f user/docker/user/Dockerfile-release user/ -t user_image
+            """.trimIndent()
+        }
     }
 }))
 
