@@ -26,6 +26,7 @@ create(RelativeId("Demo2"), BuildType({
     steps {
         script {
             name = "Download carts repo by git"
+            workingDir = "/home/taras/carts"
             scriptContent = """
                 if [ -d carts ]; then
                    sudo rm -R carts;
