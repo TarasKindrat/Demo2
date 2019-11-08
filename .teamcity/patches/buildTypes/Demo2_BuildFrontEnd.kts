@@ -26,7 +26,7 @@ create(RelativeId("Demo2"), BuildType({
                    sudo rm -R front-end;
                 fi
                 git clone https://github.com/TarasKindrat/front-end.git;
-                docker build -f front-end/ front-end/ --no-cache -t front-end_image
+                docker build -f front-end/Dockerfile front-end/ --no-cache -t front-end_image
             """.trimIndent()
         }
         script {
