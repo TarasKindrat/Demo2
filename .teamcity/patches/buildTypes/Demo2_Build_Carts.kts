@@ -53,6 +53,7 @@ create(RelativeId("Demo2"), BuildType({
         }
         script {
             name = "Build docker_image"
+            workingDir = "/home/taras/carts"
             scriptContent = """
                 #if [ -d carts ]; then
                 #   sudo rm -R carts;
