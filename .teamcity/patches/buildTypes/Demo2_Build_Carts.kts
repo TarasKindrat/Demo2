@@ -45,10 +45,10 @@ create(RelativeId("Demo2"), BuildType({
         script {
             name = "Copy carts.jar"
             scriptContent = """
-                if [ -f /home/taras/carts/carts/target/carts.jar ]; then
-                   rm /home/taras/carts/carts/target/carts.jar
+                if [ -f /home/taras/carts/carts/carts.jar ]; then
+                   rm /home/taras/carts/carts/carts.jar
                 fi
-                cp target/carts.jar /home/taras/carts/carts/target
+                cp target/carts.jar /home/taras/carts/carts
             """.trimIndent()
         }
         script {
