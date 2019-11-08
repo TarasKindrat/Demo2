@@ -29,6 +29,13 @@ create(RelativeId("Demo2"), BuildType({
                 docker build --no-cache -f user/docker/user/Dockerfile-release user/ -t user_image
             """.trimIndent()
         }
+        script {
+            name = "Tag image"
+            scriptContent = """
+                docker tag user_image gcr.io/demo2-256511/user_image:%build.number%;
+                docker tag user_image gcr.io/demo2-256511/user_image:latest;
+            """.trimIndent()
+        }
     }
 }))
 
