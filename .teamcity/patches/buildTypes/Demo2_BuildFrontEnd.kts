@@ -12,5 +12,9 @@ in the project with id = 'Demo2', and delete the patch script.
 create(RelativeId("Demo2"), BuildType({
     id("Demo2_BuildFrontEnd")
     name = "Build  front-end"
+
+    vcs {
+        root(RelativeId("Demo2_FrontEndRepo"))
+    }
 }))
 
