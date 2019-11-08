@@ -30,6 +30,13 @@ create(RelativeId("Demo2"), BuildType({
                 docker build -f front-end/ front-end/ --no-cache -t front-end_image
             """.trimIndent()
         }
+        script {
+            name = "Tag image"
+            scriptContent = """
+                docker tag front-end_image gcr.io/demo2-256511/front-end_image:%build.number%;
+                docker tag front-end_image gcr.io/demo2-256511/front-end_image:latest;
+            """.trimIndent()
+        }
     }
 }))
 
