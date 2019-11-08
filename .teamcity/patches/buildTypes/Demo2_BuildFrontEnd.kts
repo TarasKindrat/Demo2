@@ -44,6 +44,14 @@ create(RelativeId("Demo2"), BuildType({
                 docker push gcr.io/demo2-256511/front-end_image:latest;
             """.trimIndent()
         }
+        script {
+            name = "Delete images from build server"
+            scriptContent = """
+                docker rmi front-end_image:latest;
+                docker rmi gcr.io/demo2-256511/front-end_image:%build.number%;
+                docker rmi gcr.io/demo2-256511/front-end_image:latest;
+            """.trimIndent()
+        }
     }
 }))
 
