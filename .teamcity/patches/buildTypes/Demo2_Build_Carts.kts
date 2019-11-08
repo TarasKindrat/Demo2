@@ -48,7 +48,7 @@ create(RelativeId("Demo2"), BuildType({
                 if [ -f /home/taras/carts/carts/carts.jar ]; then
                    rm /home/taras/carts/carts/carts.jar
                 fi
-                cp target/carts.jar /home/taras/carts/carts
+                cp target/carts.jar /home/taras/carts/carts/carts.jar
             """.trimIndent()
         }
         script {
