@@ -14,6 +14,8 @@ create(RelativeId("Demo2"), BuildType({
     id("Demo2_BuildCatalogue")
     name = "Build catalogue"
 
+    buildNumberPattern = "0.0%build.counter%"
+
     vcs {
         root(RelativeId("Demo2_Catalogue"))
     }
