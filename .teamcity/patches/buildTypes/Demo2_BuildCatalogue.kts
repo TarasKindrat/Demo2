@@ -2,7 +2,6 @@ package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
-import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.dockerCommand
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -16,16 +15,6 @@ create(RelativeId("Demo2"), BuildType({
 
     vcs {
         root(RelativeId("Demo2_Catalogue"))
-    }
-
-    steps {
-        dockerCommand {
-            commandType = build {
-                source = path {
-                    path = "docker/catalogue/Dockerfile"
-                }
-            }
-        }
     }
 }))
 
