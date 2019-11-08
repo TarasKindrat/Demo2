@@ -37,6 +37,13 @@ create(RelativeId("Demo2"), BuildType({
                 docker tag front-end_image gcr.io/demo2-256511/front-end_image:latest;
             """.trimIndent()
         }
+        script {
+            name = "Push images to Container Registry"
+            scriptContent = """
+                docker push gcr.io/demo2-256511/front-end_image:%build.number%;
+                docker push gcr.io/demo2-256511/front-end_image:latest;
+            """.trimIndent()
+        }
     }
 }))
 
