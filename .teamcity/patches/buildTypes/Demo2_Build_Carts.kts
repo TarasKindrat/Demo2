@@ -26,7 +26,6 @@ create(RelativeId("Demo2"), BuildType({
     steps {
         script {
             name = "Download carts repo by git"
-            enabled = false
             workingDir = "/home/taras/carts"
             scriptContent = """
                 if [ -d carts ]; then
