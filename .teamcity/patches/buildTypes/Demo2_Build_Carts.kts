@@ -16,7 +16,7 @@ create(RelativeId("Demo2"), BuildType({
     id("Demo2_Build_Carts")
     name = "Build Carts"
 
-    artifactRules = "target => /carts"
+    artifactRules = "target => target"
     buildNumberPattern = "0.0%build.counter%"
 
     vcs {
