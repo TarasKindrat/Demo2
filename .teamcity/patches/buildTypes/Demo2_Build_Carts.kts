@@ -41,6 +41,15 @@ create(RelativeId("Demo2"), BuildType({
             jdkHome = "/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.232.b09-0.el7_7.x86_64/jre"
         }
         script {
+            name = "Copy carts.jar"
+            scriptContent = """
+                if [ -f /home/taras/carts/carts/target/carts.jar ]; then
+                   rm /home/taras/carts/carts/target/carts.jar
+                fi
+                cp target/carts.jar /home/taras/carts/carts/target
+            """.trimIndent()
+        }
+        script {
             name = "Download and build docker_image"
             scriptContent = """
                 #if [ -d carts ]; then
@@ -72,15 +81,6 @@ create(RelativeId("Demo2"), BuildType({
                 docker rmi carts_image:latest;
                 docker rmi gcr.io/demo2-256511/carts_image:%build.number%;
                 docker rmi gcr.io/demo2-256511/carts_image:latest;
-            """.trimIndent()
-        }
-        script {
-            name = "Copy carts.jar"
-            scriptContent = """
-                if [ -f /home/taras/carts/carts/target/carts.jar ]; then
-                   rm /home/taras/carts/carts/target/carts.jar
-                fi
-                cp target/carts.jar /home/taras/carts/carts/target
             """.trimIndent()
         }
     }
