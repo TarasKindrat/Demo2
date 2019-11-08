@@ -22,11 +22,10 @@ create(RelativeId("Demo2"), BuildType({
         script {
             name = "Download and build docker_image"
             scriptContent = """
-                if [ -d catalogue ]; then
-                   sudo rm -R catalogue;
+                if [ -d front-end ]; then
+                   sudo rm -R front-end;
                 fi
-                git clone https://github.com/TarasKindrat/front-end.git
-                cd front-end;
+                git clone https://github.com/TarasKindrat/front-end.git;
                 docker build -f front-end/ front-end/ --no-cache -t front-end_image
             """.trimIndent()
         }
