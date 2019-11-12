@@ -1,0 +1,87 @@
+vars:
+    docker_volume: db_data
+    docker_network: custom-overlay
+    carts-db_image: mongodb3.4
+    carts-db_name: carts-db
+    orders-db_image: mongodb3.4
+    orders-db_name: orders-db
+    catalogue-db_image: gcr.io/demo2-256511/catalogue-db_image:latest 
+    catalogue-db_name: catalogue-db 
+    user-db_image: user-db_image gcr.io/demo2-256511/user-db_image:latest 
+    user-db_name: user-db 
+tasks:
+    - name: "Create a Volume"
+      docker_volume:
+        name: "{{ docker_volume }}"
+
+    - name: "Create a network"
+      docker_network:
+        name: "{{ docker_network }}"  
+        published_ports: 8080:80
+
+
+- name: "Launch wordpress container"
+      docker_container:
+        name: "{{ wp_name }}"
+        image: wordpress:latest
+        volumes:
+          - "{{ docker_volume }}:/var/lib/mysql:rw"
+        ports:
+          - "{{ wp_host_port }}:{{ wp_container_port }}"
+        restart_policy: unless-stopped
+        network_mode: "{{ docker_network }}"
+        env:
+          WORDPRESS_DB_HOST: "{{ db_name }}:3306"
+          WORDPRESS_DB_PASSWORD: wordpress
+
+
+Iterating over nested lists
+
+You can use Jinja2 expressions to iterate over complex lists. For example, a loop can combine nested lists:
+- name: give users access to multiple databases
+  mysql_user:
+    name: "{{ item[0] }}"
+    priv: "{{ item[1] }}.*:ALL"
+    append_privs: yes
+    password: "foo"
+  loop: "{{ ['alice', 'bob'] |product(['clientdb', 'employeedb', 'providerdb'])|list }}"
+
+  
+Accessing the name of your loop_var
+
+New in version 2.8.
+
+As of Ansible 2.8 you can get the name of the value provided to loop_control.loop_var using the ansible_loop_var variable
+
+For role authors, writing roles that allow loops, instead of dictating the required loop_var value, you can gather the value via:
+
+"{{ lookup('vars', ansible_loop_var) }}"
+
+
+
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    - alist: [ a, b, c, d]
+    - blist: [ 0, 1, 2, 3]
+  tasks:
+    - debug: var=item
+      with_together:
+        - alist
+        - blist
+
+    - debug: msg="{{ item.0 }} and {{ item.1 }}"
+      with_together:
+        - alist
+        - blist
+
+    - shell: echo "{{ item.0 }}" "{{ item.1 }}"
+      with_together:
+        - alist
+        - blist
+
+         name: with_nested -> loop
+  debug:
+    msg: "{{ item.0 }} - {{ item.1 }}"
+  loop: "{{ list_one|product(list_two)|list }}"
