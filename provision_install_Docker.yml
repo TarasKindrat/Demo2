@@ -4,12 +4,16 @@
   hosts: instances
   become: True
   tasks:
+    - name: Update 
+      yum: update_cache=yes
+      
     - name: Installing Docker Prerequisite packages
       yum:
         name:
           - yum-utils
           - device-mapper-persistent-data
           - lvm2
+          - python-pip
         state: latest
 
     - name: Configuring docker-ce repo
@@ -37,6 +41,10 @@
         name: taras
         groups: docker
         append: yes
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker    
     
     - name: Install the 'Development tools' package group
       yum:
