@@ -1,7 +1,8 @@
 ---
 - name: Create database containers
   gather_facts: No
-  hosts: mongo-db
+  #hosts: mongo-db
+  hosts: teamcity-ci
   become: True
   vars:
     - db_images: ['mongodb3.4', 'mongodb3.4', 'gcr.io/demo2-256511/catalogue-db_image:latest', 'user-db_image gcr.io/demo2-256511/user-db_image:latest']
