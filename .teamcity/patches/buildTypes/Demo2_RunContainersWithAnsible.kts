@@ -19,7 +19,6 @@ create(RelativeId("Demo2"), BuildType({
             name = "Clone git repo"
             workingDir = "home/taras/ter_ansib"
             scriptContent = """
-                mkdir home/taras/ter_ansib;
                 cd home/taras/ter_ansib;
                 if [ -d Demo2 ]; then
                    sudo rm -R Demo2;
