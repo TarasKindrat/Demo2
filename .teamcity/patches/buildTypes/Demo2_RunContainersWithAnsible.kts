@@ -31,6 +31,11 @@ create(RelativeId("Demo2"), BuildType({
             workingDir = "home/taras/ter_ansib/Demo2"
             scriptContent = "ansible-playbook run_databases.yml -vvvv"
         }
+        script {
+            name = "Run ansible playbook for deploy db containes (1)"
+            workingDir = "home/taras/ter_ansib/Demo2"
+            scriptContent = "ansible-playbook run_web.yml -vvvv"
+        }
     }
 }))
 
