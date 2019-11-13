@@ -27,6 +27,11 @@ create(RelativeId("Demo2"), BuildType({
                 git clone -b terraformInstances https://github.com/TarasKindrat/Demo2.git;
             """.trimIndent()
         }
+        script {
+            name = "Run ansible playbook for deploy db containes"
+            workingDir = "home/taras/ter_ansib/Demo2"
+            scriptContent = "ansible-playbook run_databases.yml -vvvv"
+        }
     }
 }))
 
