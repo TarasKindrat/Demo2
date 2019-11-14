@@ -51,6 +51,10 @@ create(RelativeId("Demo2"), BuildType({
             buildType = "Demo2_BuildFrontEnd"
             successfulOnly = true
         }
+        finishBuildTrigger {
+            buildType = "Demo2_Build_Carts"
+            successfulOnly = true
+        }
     }
 }))
 
