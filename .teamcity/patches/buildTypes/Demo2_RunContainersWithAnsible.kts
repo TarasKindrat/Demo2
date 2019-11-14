@@ -47,6 +47,10 @@ create(RelativeId("Demo2"), BuildType({
         finishBuildTrigger {
             buildType = "Demo2_BuildUserDb"
         }
+        finishBuildTrigger {
+            buildType = "Demo2_BuildFrontEnd"
+            successfulOnly = true
+        }
     }
 }))
 
