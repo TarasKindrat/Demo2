@@ -71,7 +71,8 @@
       yum:
         name: git2u-all
         state: latest
-    - name: 
+    
+    - name: Docker Login to GCR
       docker_login:
         registry: https://gcr.io
         username: _json_key
