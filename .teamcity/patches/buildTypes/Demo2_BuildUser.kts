@@ -3,7 +3,6 @@ package patches.buildTypes
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
-import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.finishBuildTrigger
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
@@ -60,10 +59,6 @@ create(RelativeId("Demo2"), BuildType({
     triggers {
         vcs {
             branchFilter = ""
-        }
-        finishBuildTrigger {
-            buildType = "Demo2_BuildCatalogueDb"
-            successfulOnly = true
         }
     }
 }))
