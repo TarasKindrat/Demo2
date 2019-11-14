@@ -14,7 +14,9 @@
         name: "{{ item.0 }}"
         image: "{{ item.1 }}"
         restart_policy: unless-stopped
-        network_mode: "{{ docker_network }}"
+        #network_mode: "{{ docker_network }}"
+        networks:
+          - name: "{{ docker_network }}"
         state: started
         detach: yes
       loop: "{{ db_names|product(db_images)|list }}"
