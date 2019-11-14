@@ -3,6 +3,9 @@ mongo-db
 web
 teamcity-ci
 
+[test]
+mongo-db
+web
 #[local]
 #teamcity-ci ansible_connection=local
 

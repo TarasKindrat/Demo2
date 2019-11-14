@@ -72,6 +72,12 @@
         name: git2u-all
         state: latest
     
+    - name: Copy json GCR key to WEB and DB hosts
+    - hosts: test
+      copy:
+        src: /home/taras/.ssh/gcr.json
+        dest: /home/taras/.ssh/gcr.json
+
     - name: Docker Login to GCR
       docker_login:
         registry: https://gcr.io
