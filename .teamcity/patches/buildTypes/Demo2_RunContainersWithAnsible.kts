@@ -3,6 +3,7 @@ package patches.buildTypes
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.finishBuildTrigger
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -35,6 +36,13 @@ create(RelativeId("Demo2"), BuildType({
             name = "Run ansible playbook for deploy db containes (1)"
             workingDir = "home/taras/ter_ansib/Demo2"
             scriptContent = "ansible-playbook run_web.yml -v"
+        }
+    }
+
+    triggers {
+        finishBuildTrigger {
+            buildType = "Demo2_BuildCatalogueDb"
+            successfulOnly = true
         }
     }
 }))
