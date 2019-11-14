@@ -18,8 +18,8 @@
         #  - name: "{{ docker_network }}"
         state: started
         detach: yes
-      #loop: "{{ db_names|product(db_images)|list }}"
-      with_together:
-        - db_images
-        - db_names
-        - docker_network
+      loop: "{{ db_names|list(db_images)|list }}"
+      #with_together:
+      #  - db_images
+      #  - db_names
+      #  - docker_network
