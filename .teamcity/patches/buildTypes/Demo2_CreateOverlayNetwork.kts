@@ -43,7 +43,6 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Swarm for overlay on mongo-db"
             type = "ssh-exec-runner"
-            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 # Join to swarm
