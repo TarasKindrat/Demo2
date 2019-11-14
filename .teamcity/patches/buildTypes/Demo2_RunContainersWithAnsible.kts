@@ -17,7 +17,6 @@ create(RelativeId("Demo2"), BuildType({
     steps {
         script {
             name = "Clone git repo"
-            enabled = false
             workingDir = "home/taras/ter_ansib"
             scriptContent = """
                 cd home/taras/ter_ansib;
