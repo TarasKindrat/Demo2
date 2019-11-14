@@ -30,7 +30,9 @@ create(RelativeId("Demo2"), BuildType({
                 # Get web's inernal IP
                 #self_ip=${'$'}(ifconfig | grep 'inet 10' | cut -d' ' -f10);
                 
-                swarm_token=${'$'}(docker swarm init | awk 'NR==5{print ${'$'}0}' | awk '{${'$'}1=${'$'}2=${'$'}3=""; print ${'$'}0}');
+                #swarm_token=${'$'}(docker swarm init | awk 'NR==5{print ${'$'}0}' | awk '{${'$'}1=${'$'}2=${'$'}3=""; print ${'$'}0}');
+                swarm_token=${'$'}(docker swarm join-token manager | awk 'NR==3{print ${'$'}0}' | awk '{${'$'}1=${'$'}2=${'$'}3=""; print ${'$'}0}');
+                
                 echo "Swarm token is ${'$'}swarm_token"
                 # Set teamcity environment variable
                 echo "##teamcity[setParameter name='env.SWARM_TOKEN' value='"${'$'}swarm_token"']"
