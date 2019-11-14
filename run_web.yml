@@ -16,7 +16,8 @@
         image: "{{ item.1 }}"
         restart_policy: unless-stopped
         #network_mode: "{{ docker_network }}"
-        networks: "{{ docker_network }}"
+        networks:
+          - name: "{{ docker_network }}"
         state: started
         detach: yes
         published_ports: "{{ item.2 }}"
