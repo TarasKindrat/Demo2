@@ -71,10 +71,9 @@
       yum:
         name: git2u-all
         state: latest
-    - name: Docker Login to GCR
+    - name: 
       docker_login:
         registry: https://gcr.io
         username: _json_key
-        debug: true
-        password: "{{ lookup('file', '/home/taras/.ssh/gcr.json')}}"
+        password: " {{ lookup('file', '/home/taras/.ssh/gcr.json')}}" 
 
