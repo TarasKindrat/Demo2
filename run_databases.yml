@@ -5,9 +5,9 @@
   hosts: teamcity-ci
   become: True
   vars:
-    - db_images: ['mongo:3.4', 'mongo:3.4', 'gcr.io/demo2-256511/catalogue-db_image:latest', 'user-db_image gcr.io/demo2-256511/user-db_image:latest']
-    - db_names: [carts-db, orders-db, catalogue-db, user-db] 
-    - docker_network: custom-overlay
+    db_images: ['mongo:3.4', 'mongo:3.4', 'gcr.io/demo2-256511/catalogue-db_image:latest', 'user-db_image gcr.io/demo2-256511/user-db_image:latest']
+    db_names: [carts-db, orders-db, catalogue-db, user-db] 
+    docker_network: custom-overlay
   tasks:
     - name: "Launch database containers"
       docker_container:
