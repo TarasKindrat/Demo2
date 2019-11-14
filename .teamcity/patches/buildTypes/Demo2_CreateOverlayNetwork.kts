@@ -25,6 +25,7 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Swarm for overlay on web"
             type = "ssh-exec-runner"
+            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 # Get web's inernal IP
