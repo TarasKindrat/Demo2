@@ -55,6 +55,7 @@ create(RelativeId("Demo2"), BuildType({
         step {
             name = "Create Overlay (custom-overlay) on web"
             type = "ssh-exec-runner"
+            enabled = false
             param("jetbrains.buildServer.deployer.username", "taras")
             param("jetbrains.buildServer.sshexec.command", """
                 docker network create --driver=overlay --attachable custom-overlay;
