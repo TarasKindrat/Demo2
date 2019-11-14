@@ -29,7 +29,7 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.sshexec.command", """
                 # Get web's inernal IP
                 #self_ip=${'$'}(ifconfig | grep 'inet 10' | cut -d' ' -f10);
-                
+                docker swarm init
                 #swarm_token=${'$'}(docker swarm init | awk 'NR==5{print ${'$'}0}' | awk '{${'$'}1=${'$'}2=${'$'}3=""; print ${'$'}0}');
                 swarm_token=${'$'}(docker swarm join-token manager | awk 'NR==3{print ${'$'}0}' | awk '{${'$'}1=${'$'}2=${'$'}3=""; print ${'$'}0}');
                 
