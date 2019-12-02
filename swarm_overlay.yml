@@ -1,0 +1,32 @@
+---
+- name: Check if Swarm has already been Initialized
+- hosts: web 
+  shell: docker node ls
+  register: swarm_status
+  ignore_errors: true
+
+- name: Init a new swarm with default parameters
+  docker_swarm:
+    state: present
+  when: swarm_status.rc != 0
+  
+
+- name: Get the Manager join-token
+- hosts: web 
+  token: "{{ result.swarm_facts.JoinTokens.Worker }}"
+  
+
+- name: Add Managers to the Swarm
+- hosts: mongo-db
+  shell: "docker swarm join --token {{ hostvars['web']['manager_token']['stdout'] }} {{ hostvars['web']['ansible_default_ipv4']['address'] }}:2377"
+  when: swarm_status.rc != 0  
+
+- name: Add overlay network custom-overlay
+- hosts: web 
+  docker_network:
+      name: custom-overlay
+      driver: overlay
+      state: present
+      attachable: yes
+
+-

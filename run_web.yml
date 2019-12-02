@@ -1,0 +1,25 @@
+---
+- name: Create database containers
+  gather_facts: No
+  hosts: web
+  become: True
+  vars:
+    # Creale lists of images and container's names
+    web_images: "['gcr.io/demo2-256511/front-end_image:latest', 'gcr.io/demo2-256511/carts_image:latest', 'gcr.io/demo2-256511/catalogue_image:latest', 'gcr.io/demo2-256511/user_image:latest']"
+    web_names: ['front-end', 'carts', 'catalogue', 'user'] 
+    web_ports_mapping: ['80:8079', '8081:80', '8080:80', '8084:80']
+    docker_network: custom-overlay
+  tasks:
+    - name: "Launch web containers"
+      docker_container:
+        name: "{{ item.0 }}"
+        image: "{{ item.1 }}"
+        restart_policy: unless-stopped
+        network_mode: "{{ docker_network }}"
+        state: started
+        detach: yes
+        published_ports: "{{ item.2 }}"
+      with_together:
+        - "{{ web_names }}"
+        - "{{ web_images }}"
+        - "{{ web_ports_mapping }}"

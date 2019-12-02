@@ -1,0 +1,14 @@
+[instances]
+mongo-db
+web
+teamcity-ci
+
+[test]
+mongo-db
+web
+#[local]
+#teamcity-ci ansible_connection=local
+
+[instances:vars]
+#ansible_ssh_user=taras
+#ansible_ssh_public_key=/home/taras/.ssh/id_rsa.pub

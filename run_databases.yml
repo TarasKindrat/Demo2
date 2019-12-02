@@ -1,0 +1,21 @@
+---
+- name: Create database containers
+  gather_facts: No
+  hosts: mongo-db
+  become: True
+  vars:
+    db_images: ['mongo:3.4', 'mongo:3.4', 'gcr.io/demo2-256511/catalogue-db_image:latest', 'gcr.io/demo2-256511/user-db_image:latest']
+    db_names: ['carts-db', 'orders-db', 'catalogue-db', 'user-db']
+    docker_network: custom-overlay
+  tasks:
+    - name: "Launch database containers"
+      docker_container:
+        name: "{{ item.0 }}"
+        image: "{{ item.1 }}"
+        restart_policy: unless-stopped
+        network_mode: "{{ docker_network }}"
+        state: started
+        detach: yes
+      with_together:
+        - "{{ db_names }}"
+        - "{{ db_images }}"

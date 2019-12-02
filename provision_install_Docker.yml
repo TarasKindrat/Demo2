@@ -1,0 +1,86 @@
+---
+- name: Install docker
+  gather_facts: No
+  hosts: instances
+  become: True
+  tasks:
+    - name: Update 
+      yum: update_cache=yes
+      
+    - name: Installing Docker Prerequisite packages
+      yum:
+        name:
+          - yum-utils
+          - device-mapper-persistent-data
+          - lvm2
+          - python-pip
+        state: latest
+
+    - name: Configuring docker-ce repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+        mode: 0644
+
+    - name: Installing Docker latest version
+      yum:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: latest
+
+    - name: Starting and Enabling Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add user taras to docker group
+      user:
+        name: taras
+        groups: docker
+        append: yes
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker    
+    
+    - name: Install the 'Development tools' package group
+      yum:
+        name: "@Development tools"
+        state: present  
+    
+    - name: Install additional tools
+      yum:
+        name:
+          - gettext-devel
+          - openssl-devel
+          - perl-CPAN
+          - perl-devel
+          - zlib-devel
+          - https://centos7.iuscommunity.org/ius-release.rpm
+        state: latest
+    
+    - name: remove old git 
+      yum:
+        name: git
+        state: absent
+        
+    - name: Install git2u
+      yum:
+        name: git2u-all
+        state: latest
+    
+    - name: Copy json GCR key to WEB and DB hosts
+    - hosts: test
+      copy:
+        src: /home/taras/.ssh/gcr.json
+        dest: /home/taras/.ssh/gcr.json
+
+    - name: Docker Login to GCR
+      docker_login:
+        registry: https://gcr.io
+        username: _json_key
+        password: " {{ lookup('file', '/home/taras/.ssh/gcr.json')}}" 
+
