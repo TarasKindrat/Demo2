@@ -43,7 +43,7 @@
     group: root
     mode: 0644
     
-- name: "Launch nginx container"
+- name: launch nginx container
   docker_container:
     name: "nginx"
     image: "nginx"
