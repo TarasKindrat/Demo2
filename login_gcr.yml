@@ -1,9 +1,0 @@
-- name: Docker Login to GCR
-  tasks:
-  - name: Docker Login
-    hosts: instances
-    docker_login:
-      registry: https://gcr.io
-      username: _json_key
-      debug: true
-      password: " {{ lookup('file', '/home/taras/.ssh/gcr.json')}}"
