@@ -95,7 +95,7 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
         }
         script {
-            name = "provising nodes"
+            name = "Provising nodes, installing Docker end GCR cred"
             scriptContent = """
                 git clone -b ansible https://github.com/TarasKindrat/Demo2.git;
                 cd Demo2;
