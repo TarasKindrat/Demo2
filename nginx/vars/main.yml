@@ -2,7 +2,7 @@
 # vars file for nginx
 key_file: /etc/nginx/ssl/nginx.key
 cert_file: /etc/nginx/ssl/nginx.crt
-conf_file: /etc/nginx/conf.d/default.conf
+conf_file: /etc/nginx/conf.d/soks.elk.local.conf
 htpasswd_file: /etc/nginx/htpasswd.users
 server_name: soks.elk.local
 basic_aut_username: admin

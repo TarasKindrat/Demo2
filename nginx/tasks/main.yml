@@ -49,7 +49,7 @@
 - name: copy nginx config file
   template:
     src: nginx.conf.j2
-    dest: "{{ nginx_volume }}"
+    dest: "{{ nginx_volume }}/{{ server_name }}.conf"
     owner: root
     group: root
     mode: '0600'
