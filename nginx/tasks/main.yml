@@ -1,4 +1,20 @@
 ---
+- name: install httpd-tools and python-pip
+  yum: 
+    name:
+    - httpd-tools  
+    - python-pip     
+    state: latest
+
+- name: pip upgrade pip
+  pip:
+    name: pip
+    extra_args: --upgrade
+
+- name: pip install passlib
+  pip:
+    name: passlib
+     
 - name: create directories for nginx volume
   file:
     path: "{{ nginx_volume }}" 
