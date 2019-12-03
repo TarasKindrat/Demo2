@@ -23,6 +23,9 @@ create(RelativeId("Demo2"), BuildType({
         script {
             name = "Run Ansible role ELK"
             scriptContent = """
+                if [ -d Demo2 ]; then
+                   sudo rm -R Demo2;
+                fi
                 git clone -b ansible https://github.com/TarasKindrat/Demo2.git;
                 cd Demo2;
                 ansible-playbook install_ELK.yml
