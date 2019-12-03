@@ -53,6 +53,14 @@ create(RelativeId("Demo2"), BuildType({
             """.trimIndent()
         }
         script {
+            name = "Provising nodes, installing Docker end GCR cred"
+            scriptContent = """
+                git clone -b ansible https://github.com/TarasKindrat/Demo2.git;
+                cd Demo2;
+                ansible-playbook provision_install_Docker.yml
+            """.trimIndent()
+        }
+        script {
             name = "Destroy web and mongo-db"
             enabled = false
             executionMode = BuildStep.ExecutionMode.RUN_ON_FAILURE
@@ -93,14 +101,6 @@ create(RelativeId("Demo2"), BuildType({
             param("jetbrains.buildServer.deployer.targetUrl", "mongo-db")
             param("jetbrains.buildServer.sshexec.authMethod", "CUSTOM_KEY")
             param("jetbrains.buildServer.sshexec.keyFile", "/home/taras/.ssh/id_rsa")
-        }
-        script {
-            name = "Provising nodes, installing Docker end GCR cred"
-            scriptContent = """
-                git clone -b ansible https://github.com/TarasKindrat/Demo2.git;
-                cd Demo2;
-                ansible-playbook provision_install_Docker.yml
-            """.trimIndent()
         }
     }
 }))
