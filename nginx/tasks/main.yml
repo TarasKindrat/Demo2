@@ -56,6 +56,6 @@
     network_mode: "{{ elastic_network }}"
     state: started
     detach: yes
-  published_ports: 
-    - "80:80"
-    - "443:443"
+    published_ports: 
+      - "80:80"
+      - "443:443"
