@@ -73,7 +73,7 @@
     volumes:
       - "{{ nginx_volume }}/nginx.key:{{ key_file }}"
       - "{{ nginx_volume }}/nginx.crt:{{ cert_file }}"
-      - "{{ nginx_volume }}/nginx.conf:{{ conf_file }}"
+      - "{{ nginx_volume }}/{{ server_name }}.conf:{{ conf_file }}"
       - "{{ nginx_volume }}/htpasswd.users:{{ htpasswd_file }}"
     restart_policy: unless-stopped
     network_mode: "{{ elastic_network }}"
