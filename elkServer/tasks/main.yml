@@ -22,7 +22,7 @@
     detach: yes
     env:
         discovery.type: "single-node"
-    published_ports: "9200:9200"
+    #published_ports: "9200:9200"
  
 - name: "Launch kibana container"
   docker_container:
