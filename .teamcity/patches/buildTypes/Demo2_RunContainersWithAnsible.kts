@@ -15,6 +15,10 @@ create(RelativeId("Demo2"), BuildType({
     id("Demo2_RunContainersWithAnsible")
     name = "Run containers with Ansible"
 
+    vcs {
+        root(RelativeId("Demo2_HttpsGithubComTarasKindratDemo2gitRefsHeadsMaster"))
+    }
+
     steps {
         script {
             name = "Clone git repo"
