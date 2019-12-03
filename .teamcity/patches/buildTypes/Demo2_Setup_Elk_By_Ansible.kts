@@ -2,6 +2,7 @@ package patches.buildTypes
 
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.BuildType
+import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_2.ui.*
 
 /*
@@ -15,6 +16,17 @@ create(RelativeId("Demo2"), BuildType({
 
     vcs {
         root(RelativeId("Demo2_HttpsGithubComTarasKindratDemo2gitRefsHeadsMaster"))
+    }
+
+    steps {
+        script {
+            name = "Run Ansible role ELK"
+            scriptContent = """
+                git clone -b ansible https://github.com/TarasKindrat/Demo2.git;
+                cd Demo2;
+                ansible-playbook install_ELK.yml
+            """.trimIndent()
+        }
     }
 }))
 
