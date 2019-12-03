@@ -28,7 +28,7 @@ create(RelativeId("Demo2"), BuildType({
                 if [ -d Demo2 ]; then
                    sudo rm -R Demo2;
                 fi
-                git clone -b terraformInstances https://github.com/TarasKindrat/Demo2.git;
+                git clone -b ansible https://github.com/TarasKindrat/Demo2.git;
             """.trimIndent()
         }
         script {
