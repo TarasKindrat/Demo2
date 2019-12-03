@@ -15,6 +15,13 @@
   pip:
     name: passlib
 
+- name: "Create a network"
+  docker_network:
+    name: "{{ elastic_network }}"
+    driver: overlay
+    state: present
+    attachable: yes
+
 - name: create directories for nginx volume
   file:
     path: "{{ nginx_volume }}" 
