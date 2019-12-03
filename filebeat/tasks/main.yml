@@ -1,0 +1,33 @@
+---
+# tasks file for filebeat
+- name: create directories for filebeat volume
+  file:
+    path: "{{ filebeat_volume }}" 
+    state: directory
+    mode: '0755'
+
+- name: copy filebeat.yml
+  copy: 
+    src: filebeat.yml
+    dest: "{{ filebeat_volume }}" 
+    owner: root
+    group: root
+    mode: '0600'
+
+- name: "Launch filebeat container"
+  docker_container:
+    name: "filebeat"
+    image: "docker.elastic.co/beats/filebeat:{{ elk_version }}"
+    user: root
+    restart_policy: unless-stopped
+    network_mode: "{{ elastic_network }}"
+    state: started
+    detach: yes
+    env:
+      setup.kibana.host: "kibana:5601"
+      #output.elasticsearch.hosts: "['elasticsearch:9200']" 
+    volumes:
+      - "{{ filebeat_volume }}/filebeat.yml:/etc/filebeat/filebeat.yml:ro"
+      - /var/lib/docker:/var/lib/docker:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/log/messages:/var/log/messages:ro

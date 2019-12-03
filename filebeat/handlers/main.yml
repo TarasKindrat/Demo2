@@ -1,0 +1,6 @@
+---
+# handlers file for filebeat
+- name: restart beat
+  service: 
+    name: "{{ beat }}"
+    state: restarted  

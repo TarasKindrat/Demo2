@@ -1,0 +1,21 @@
+- name: run beats
+  gather_facts: Yes
+  hosts: beats_clients
+  become: True
+
+  roles:
+    - role: filebeat
+    - role: metricbeat 
+    - role: packetbeat
+      elk_host_IP: 192.168.0.132
+
+- name: install packetbeat on DHCP-server-IP-net
+  hosts: dhcp_servers
+  become: True
+
+  roles:
+    - role: filebeat
+    - role: metricbeat 
+    - role: packetbeat
+      elk_host_IP: 192.168.0.132
+  

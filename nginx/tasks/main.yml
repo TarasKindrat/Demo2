@@ -1,0 +1,61 @@
+---
+- name: create directories for nginx volume
+  file:
+    path: "{{ nginx_volume }}" 
+    state: directory
+    mode: '0755'
+          
+- name: copy TLS key
+  copy:
+    src: nginx.key
+    dest: "{{ nginx_volume }}" 
+    owner: root
+    group: root
+    mode: '0600'
+  
+
+- name: copy TLS certificate
+  copy: 
+    src: nginx.crt
+    dest: "{{ nginx_volume }}" 
+    owner: root
+    group: root
+    mode: '0600'
+  
+    
+- name: copy nginx config file
+  template:
+    src: nginx.conf.j2
+    dest: "{{ nginx_volume }}"
+    owner: root
+    group: root
+    mode: '0600'
+  
+       
+- name: htpasswd
+  htpasswd:
+    path: "{{ nginx_volume }}"
+    state: present
+    name: "{{ basic_aut_username }}"
+    password: "{{ basic_auth_password }}"
+    crypt_scheme: md5_crypt
+    owner: root
+    group: root
+    mode: 0644
+    
+- name: "Launch nginx container"
+  docker_container:
+    name: "nginx"
+    image: "nginx"
+    volumes:
+      - "{{ nginx_volume }}/nginx.key:{{ key_file }}"
+      - "{{ nginx_volume }}/nginx.crt:{{ cert_file }}"
+      - "{{ nginx_volume }}nginx.conf:{{ conf_file }}"
+      - "{{ nginx_volume }}/htpasswd.users:{{ htpasswd_file_file }}"
+    restart_policy: unless-stopped
+    network_mode: "{{ elastic_network }}"
+    state: started
+    detach: yes
+  published_ports: 
+    - "80:80"
+    - "443:443"

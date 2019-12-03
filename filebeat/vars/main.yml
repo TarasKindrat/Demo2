@@ -1,0 +1,5 @@
+---
+# vars file for filebeat
+elk_version: 7.5.0
+elastic_network: elastic-overlay
+filebeat_volume: /home/filebeat

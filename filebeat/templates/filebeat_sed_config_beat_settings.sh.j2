@@ -1,0 +1,4 @@
+sed -i "s/output.elasticsearch:/#output.elasticsearch:/" /etc/{{ beat }}/{{ beat }}.yml
+sed -i 's/hosts: \["localhost:9200"\]/#hosts: \["localhost:9200"\]/' /etc/{{ beat }}/{{ beat }}.yml
+sed -i "s/#output.logstash:/output.logstash:/" /etc/{{ beat }}/{{ beat }}.yml
+sed -i 's/#hosts: \["localhost:5044"\]/hosts: \["{{ elk_host_IP }}:5044"\]/' /etc/{{ beat }}/{{ beat }}.yml

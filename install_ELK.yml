@@ -1,0 +1,21 @@
+---
+- name: Install elk.stack on Centos 7
+  gather_facts: Yes
+  hosts: mongo-db
+  become: True
+
+  roles:
+    - role: nginx
+    - role: elkServer
+    - role: filebeat
+      
+- name: Install filebeat on web host
+  gather_facts: Yes
+  hosts: web
+  become: True
+
+  roles:
+    - role: filebeat
+      
+
+     
