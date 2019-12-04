@@ -1,7 +1,7 @@
 ---
 # vars file for elkServer
 elk_version: 7.5.0
-elastic_volume: elasticsearch_data
+elastic_volume: /home/elasticsearch_data
 elastic_network: elastic-overlay
 
 #temp_file: /tmp/elastick_production_modification.sh
