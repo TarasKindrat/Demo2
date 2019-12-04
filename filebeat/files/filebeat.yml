@@ -3,8 +3,8 @@ filebeat.inputs:
   paths:
     - /var/log/messages
 
-#- type: container docker
-- type: docker
+- type: container docker
+#- type: docker
   paths: 
     - '/var/lib/docker/containers/*/*.log'
 

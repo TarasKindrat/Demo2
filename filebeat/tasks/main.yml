@@ -27,7 +27,7 @@
       setup.kibana.host: "kibana:5601"
       #output.elasticsearch.hosts: "['elasticsearch:9200']" 
     volumes:
-      - "{{ filebeat_volume }}/filebeat.yml:/etc/filebeat/filebeat.yml:ro"
+      - "{{ filebeat_volume }}/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro"
       - /var/lib/docker:/var/lib/docker:ro
       - /var/run/docker.sock:/var/run/docker.sock
       - /var/log/messages:/var/log/messages:ro
