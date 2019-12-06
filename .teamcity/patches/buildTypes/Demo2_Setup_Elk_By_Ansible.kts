@@ -35,6 +35,7 @@ create(RelativeId("Demo2"), BuildType({
 
     triggers {
         finishBuildTrigger {
+            enabled = false
             buildType = "Demo2_RunContainersWithAnsible"
             successfulOnly = true
         }
