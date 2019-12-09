@@ -5,6 +5,6 @@
 
 
 P.S.
-For import some resource (example team-city):  terraform import google_compute_instance.teamcity-ci demo2-xxxxxxx/europe-west3-c/teamcity-ci 
+For import some resource (example team-city):  "terraform import google_compute_instance.teamcity-ci demo2-xxxxxxx/europe-west3-c/teamcity-ci" 
 
-After manual configuration of infrastructure terraform refresh will add changes to terraform.tfstate
+After manual configuration of infrastructure: "terraform refresh" - will add changes to terraform.tfstate
